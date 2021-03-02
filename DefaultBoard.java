@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class DefaultBoard implements IBoard {
 
     final int boardWidth = 8;
@@ -12,7 +14,7 @@ public class DefaultBoard implements IBoard {
     @Override
     public void drawBoard() {
 
-       /* figures[0][0] = new Rook(0, 0);
+      /*  figures[0][0] = new Rook(0, 0);
         figures[0][1] = new Knight(0, 1);
         figures[0][2] = new Bishop(0, 2);
         figures[0][3] = new King(0, 3);
@@ -22,8 +24,7 @@ public class DefaultBoard implements IBoard {
         figures[0][7] = new Rook(0, 7);
         figures[1][0] = new Pawn(1, 0);
 
-        */
-
+       */
 
         StringBuilder result = new StringBuilder();
 
@@ -68,7 +69,6 @@ public class DefaultBoard implements IBoard {
                 result.append("\n");
             }
 
-
         }
 
         System.out.println(result);
@@ -80,6 +80,14 @@ public class DefaultBoard implements IBoard {
         for (int i = 0; i < fieldWidth; i++) {
 
             result.append("█");
+        }
+    }
+
+    public void settFiguresPositions(List<Figure> figureList) {
+
+        for (int i = 0; i < figureList.size(); i++) {
+
+            figures[figureList.get(i).getRowPosition()][figureList.get(i).getCowPosition()] = figureList.get(i);
         }
     }
 }

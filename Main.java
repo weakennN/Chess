@@ -4,16 +4,16 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-
+        Rook rook = new Rook(0, 0);
         DefaultBoard defaultBoard = new DefaultBoard();
-
+        List<Figure> figures = new ArrayList<>(List.of(rook));
+        defaultBoard.settFiguresPositions(figures);
         defaultBoard.drawBoard();
 
         King king = new King(0, 4);
         Queen queen = new Queen(0, 3);
         System.out.println();
-        Rook rook = new Rook(0, 0);
-        List<Figure> figures = new ArrayList<>(List.of(rook));
+
         Board board = new Board(figures);
 
         /*figures[0][1] = new Knight(0, 1);

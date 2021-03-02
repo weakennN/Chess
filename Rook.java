@@ -24,4 +24,14 @@ public class Rook extends Figure {
 
         return color + figureDraw[row];
     }
+
+    @Override
+    public void possibleMoves() {
+
+    }
+
+    @Override
+    protected void isMoveValid(int row, int col) {
+
+    }
 }
