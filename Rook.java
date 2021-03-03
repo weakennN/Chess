@@ -36,15 +36,18 @@ public class Rook extends Figure {
         this.possibleVerticalMoves(-1);
         this.possibleHorizontalMoves(1);
         this.possibleHorizontalMoves(-1);
-        
+
         */
-        //TODO: super.getRowPosition() + increment in the for loop.
+
     }
 
     @Override
     protected void isMoveValid(int row, int col) {
 
         if (super.getRowPosition() < row && super.getColPosition() < col) {
+            throw new IllegalArgumentException("Invalid move");
+        }
+        if (super.getRowPosition() < row && super.getColPosition() > col){
             throw new IllegalArgumentException("Invalid move");
         }
     }
