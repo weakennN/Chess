@@ -36,7 +36,7 @@ public abstract class Figure {
         return rowPosition;
     }
 
-    public int getCowPosition() {
+    public int getColPosition() {
         return colPosition;
     }
 
@@ -61,4 +61,10 @@ public abstract class Figure {
     public abstract void possibleMoves();
 
     protected abstract void isMoveValid(int row, int col);
+
+    protected void emptyMoves(){
+
+        this.possibleRowPositions.clear();
+        this.possibleColPositions.clear();
+    }
 }

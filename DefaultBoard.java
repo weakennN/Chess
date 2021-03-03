@@ -87,7 +87,23 @@ public class DefaultBoard implements IBoard {
 
         for (int i = 0; i < figureList.size(); i++) {
 
-            figures[figureList.get(i).getRowPosition()][figureList.get(i).getCowPosition()] = figureList.get(i);
+            figures[figureList.get(i).getRowPosition()][figureList.get(i).getColPosition()] = figureList.get(i);
         }
+    }
+
+    public void moveFigure(int row, int col, int rowToMove, int colToMove) {
+
+        if (figures[row][col] == null) {
+
+            throw new IllegalArgumentException("Theres no figure at this square.");
+        }
+
+        figures[row][col].possibleMoves();
+        figures[row][col].isMoveValid(rowToMove, colToMove);
+        figures[row][col].move(rowToMove, colToMove);
+        //TODO: Make possibleMoves(); execute it self in the move();
+        figures[rowToMove][colToMove] = figures[row][col];
+        figures[row][col] = null;
+        drawBoard();
     }
 }

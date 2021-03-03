@@ -23,6 +23,7 @@ public class Pawn extends Figure {
         this.firstMove = true;
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
+        super.emptyMoves();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Pawn extends Figure {
 
         if (!this.firstMove) {
             super.addPossibleRowPosition(super.getRowPosition() + 2);
-            super.addPossibleColPosition(super.getCowPosition());
+            super.addPossibleColPosition(super.getColPosition());
         } else {
             super.addPossibleRowPosition(super.getRowPosition() + 1);
         }

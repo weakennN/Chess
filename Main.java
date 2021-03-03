@@ -1,30 +1,50 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         Rook rook = new Rook(0, 0);
-        DefaultBoard defaultBoard = new DefaultBoard();
-        List<Figure> figures = new ArrayList<>(List.of(rook));
-        defaultBoard.settFiguresPositions(figures);
-        defaultBoard.drawBoard();
-
+        Rook rook1 = new Rook(0, 7);
         King king = new King(0, 4);
         Queen queen = new Queen(0, 3);
-        System.out.println();
+        List<Figure> figures = new ArrayList<>();
+        for (int i = 0;i < 8;i++){
 
+            Pawn pawn = new Pawn(1,i);
+            figures.add(pawn);
+        }
+        figures.add(rook);
+        figures.add(rook1);
+        figures.add(king);
+        figures.add(queen);
+        Knight knight = new Knight(0, 1);
+        Knight knight1 = new Knight(0, 6);
+        figures.add(knight);
+        figures.add(knight1);
+        Bishop bishop = new Bishop(0, 2);
+        Bishop bishop1 = new Bishop(0, 5);
+        figures.add(bishop);
+        figures.add(bishop1);
+
+        DefaultBoard defaultBoard = new DefaultBoard();
+        defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
+        Game game = new Game(board,null,defaultBoard);
+        defaultBoard.drawBoard();
 
-        /*figures[0][1] = new Knight(0, 1);
-        figures[0][2] = new Bishop(0, 2);
-        figures[0][3] = new King(0, 3);
-        figures[0][4] = new Queen(0, 4);
-        figures[0][5] = new Bishop(0, 5);
-        figures[0][6] = new Knight(0, 6);
-        figures[0][7] = new Rook(0, 7);
-        figures[1][0] = new Pawn(1, 0);
+        for (int i = 0;i < 10;i++){
 
-         */
+            System.out.print("Type your move: ");
+            String com = scan.nextLine();
+            String[] tokens = com.split("\\s+");
+            int figureRow = Integer.parseInt(tokens[0]);
+            int figureCol = Integer.parseInt(tokens[1]);
+            int rowToMove = Integer.parseInt(tokens[2]);
+            int colToMove = Integer.parseInt(tokens[3]);
+            game.play(figureRow,figureCol,rowToMove,colToMove);
+        }
     }
 }

@@ -28,12 +28,13 @@ public class Rook extends Figure {
 
     @Override
     public void possibleMoves() {
-        super.addPossibleColPosition(super.getCowPosition());
+
+        super.addPossibleColPosition(super.getColPosition());
         this.possibleVerticalMoves(1);
         this.possibleVerticalMoves(-1);
         this.possibleHorizontalMoves(1);
         this.possibleHorizontalMoves(-1);
-        //TODO: horizontalPossibleMoves.
+        //TODO: super.getRowPosition() + increment in the for loop.
     }
 
     @Override
@@ -50,7 +51,7 @@ public class Rook extends Figure {
 
     private void possibleHorizontalMoves(int incrementer) {
 
-        for (int i = super.getCowPosition(); i < 8 && i >= 0; i += incrementer) {
+        for (int i = super.getColPosition(); i < 8 && i >= 0; i += incrementer) {
             super.addPossibleColPosition(i);
         }
     }
