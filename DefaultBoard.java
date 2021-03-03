@@ -104,6 +104,7 @@ public class DefaultBoard implements IBoard {
         if (figures[rowToMove][colToMove] != null) {
 
             figures[row][col].attackSquare(rowToMove, colToMove);
+            figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
             drawBoard();
             return;
