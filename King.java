@@ -42,4 +42,9 @@ public class King extends Figure {
             throw new IllegalArgumentException("Invalid move");
         }
     }
+
+    @Override
+    public void attackSquare(int row, int col) {
+
+    }
 }

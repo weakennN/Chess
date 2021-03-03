@@ -17,6 +17,7 @@ public class Knight extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
+        super.emptyMoves();
     }
 
     @Override
@@ -28,10 +29,29 @@ public class Knight extends Figure {
     @Override
     public void possibleMoves() {
 
+        super.addPossibleRowPosition(super.getRowPosition() - 2);
+        super.addPossibleRowPosition(super.getRowPosition() + 2);
+        super.addPossibleColPosition(super.getColPosition() + 1);
+        super.addPossibleColPosition(super.getColPosition() - 1);
+        super.addPossibleRowPosition(super.getRowPosition() + 1);
+        super.addPossibleRowPosition(super.getRowPosition() - 1);
+        super.addPossibleColPosition(super.getColPosition() + 2);
+        super.addPossibleColPosition(super.getColPosition() - 2);
+
     }
 
     @Override
     protected void isMoveValid(int row, int col) {
+
+        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
+
+            throw new IllegalArgumentException("Invalid move.");
+        }
+    }
+
+    @Override
+    public void attackSquare(int row, int col) {
+
 
     }
 }

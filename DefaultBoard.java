@@ -13,20 +13,16 @@ public class DefaultBoard implements IBoard {
 
     @Override
     public void drawBoard() {
-
-      /*  figures[0][0] = new Rook(0, 0);
-        figures[0][1] = new Knight(0, 1);
-        figures[0][2] = new Bishop(0, 2);
-        figures[0][3] = new King(0, 3);
-        figures[0][4] = new Queen(0, 4);
-        figures[0][5] = new Bishop(0, 5);
-        figures[0][6] = new Knight(0, 6);
-        figures[0][7] = new Rook(0, 7);
-        figures[1][0] = new Pawn(1, 0);
-
-       */
-
+        int count = 1;
         StringBuilder result = new StringBuilder();
+
+        result.append(ConsoleColors.CYAN);
+        result.append("(N) - Knight" + "\n");
+        result.append("(B) - Bishop" + "\n");
+        result.append("(P) - Pawn" + "\n");
+        result.append("(Q) - Queen" + "\n");
+        result.append("(K) - King" + "\n");
+        result.append("(R) - Rook" + "\n");
 
         for (int row = 0; row < boardHeight; row++) {
 
@@ -66,6 +62,11 @@ public class DefaultBoard implements IBoard {
 
 
                 }
+
+                if (i == 2) {
+                    result.append(ConsoleColors.WHITE + "     " + count++);
+                }
+
                 result.append("\n");
             }
 
@@ -73,6 +74,11 @@ public class DefaultBoard implements IBoard {
 
         System.out.println(result);
 
+        for (int i = 0; i < 8; i++) {
+
+            System.out.print(ConsoleColors.WHITE + "          " + (i + 1) + "            ");
+        }
+        System.out.println();
     }
 
     private void drawSquare(StringBuilder result) {
@@ -93,15 +99,29 @@ public class DefaultBoard implements IBoard {
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
+
+        //TODO: check what happen to the rook 1 1 1 5;
+        if (figures[rowToMove][colToMove] != null) {
+
+            figures[row][col].attackSquare(rowToMove, colToMove);
+            figures[row][col] = null;
+            drawBoard();
+            return;
+        }
+
         if (figures[row][col] == null) {
 
             throw new IllegalArgumentException("Theres no figure at this square.");
+        } else if (rowToMove >= 8 || colToMove >= 8) {
+
+            throw new IllegalArgumentException("Invalid move");
         }
 
         figures[row][col].possibleMoves();
         figures[row][col].isMoveValid(rowToMove, colToMove);
         figures[row][col].move(rowToMove, colToMove);
         //TODO: Make possibleMoves(); execute it self in the move();
+        //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
         figures[rowToMove][colToMove] = figures[row][col];
         figures[row][col] = null;
         drawBoard();

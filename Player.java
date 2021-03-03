@@ -1,10 +1,12 @@
 public class Player implements IPlayer {
 
+    private String name;
     private boolean turn;
 
-    public Player(boolean turn) {
+    public Player(boolean turn, String name) {
 
         this.turn = turn;
+        this.name = name;
     }
 
     @Override

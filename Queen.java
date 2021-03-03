@@ -34,4 +34,9 @@ public class Queen extends Figure {
     protected void isMoveValid(int row, int col) {
 
     }
+
+    @Override
+    public void attackSquare(int row, int col) {
+
+    }
 }

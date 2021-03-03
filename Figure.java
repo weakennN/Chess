@@ -62,9 +62,11 @@ public abstract class Figure {
 
     protected abstract void isMoveValid(int row, int col);
 
-    protected void emptyMoves(){
+    protected void emptyMoves() {
 
         this.possibleRowPositions.clear();
         this.possibleColPositions.clear();
     }
+
+    public abstract void attackSquare(int row, int col);
 }

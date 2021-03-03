@@ -53,4 +53,17 @@ public class Pawn extends Figure {
         }
 
     }
+
+    @Override
+    public void attackSquare(int rowPosition, int cowPosition) {
+
+        if (rowPosition - 1 == super.getRowPosition()) {
+
+            if (super.getColPosition() - 1 == cowPosition || super.getColPosition() + 1 == cowPosition) {
+
+                super.setCowPosition(cowPosition);
+                super.setRowPosition(rowPosition);
+            }
+        }
+    }
 }

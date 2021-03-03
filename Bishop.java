@@ -15,9 +15,9 @@ public class Bishop extends Figure {
     @Override
     public void move(int rowPosition, int cowPosition) {
 
-        super.emptyMoves();
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
+        super.emptyMoves();
     }
 
     @Override
@@ -39,10 +39,17 @@ public class Bishop extends Figure {
     @Override
     protected void isMoveValid(int row, int col) {
 
+
         if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
 
             throw new IllegalArgumentException("Invalid move");
         }
+
+    }
+
+    @Override
+    public void attackSquare(int row, int col) {
+
     }
 
     private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
