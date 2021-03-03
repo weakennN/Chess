@@ -10,10 +10,12 @@ public class Rook extends Figure {
 
     public Rook(int rowPosition, int cowPosition) {
         super(rowPosition, cowPosition);
+
     }
 
     @Override
     public void move(int rowPosition, int cowPosition) {
+
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
@@ -29,17 +31,22 @@ public class Rook extends Figure {
     @Override
     public void possibleMoves() {
 
-        super.addPossibleColPosition(super.getColPosition());
+       /* super.addPossibleColPosition(super.getColPosition());
         this.possibleVerticalMoves(1);
         this.possibleVerticalMoves(-1);
         this.possibleHorizontalMoves(1);
         this.possibleHorizontalMoves(-1);
+        
+        */
         //TODO: super.getRowPosition() + increment in the for loop.
     }
 
     @Override
     protected void isMoveValid(int row, int col) {
 
+        if (super.getRowPosition() < row && super.getColPosition() < col) {
+            throw new IllegalArgumentException("Invalid move");
+        }
     }
 
     private void possibleVerticalMoves(int incrementer) {
