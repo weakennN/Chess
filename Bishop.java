@@ -15,6 +15,7 @@ public class Bishop extends Figure {
     @Override
     public void move(int rowPosition, int cowPosition) {
 
+        super.emptyMoves();
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
     }
@@ -28,10 +29,28 @@ public class Bishop extends Figure {
     @Override
     public void possibleMoves() {
 
+        addPossibleDiagonalMoves(1, 1);
+        addPossibleDiagonalMoves(-1, 1);
+        addPossibleDiagonalMoves(-1, -1);
+        addPossibleDiagonalMoves(1, 1);
+
     }
 
     @Override
     protected void isMoveValid(int row, int col) {
 
+        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
+
+            throw new IllegalArgumentException("Invalid move");
+        }
+    }
+
+    private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
+
+        for (int row = super.getRowPosition() + rowIncrementer,col = super.getColPosition() + colIncrementer;col >= 0 && row < 8 && col < 8 && row >= 0;row += rowIncrementer,col += colIncrementer){
+
+            super.addPossibleRowPosition(row);
+            super.addPossibleColPosition(col);
+        }
     }
 }
