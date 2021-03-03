@@ -28,10 +28,18 @@ public class King extends Figure {
     @Override
     public void possibleMoves() {
 
+        super.addPossibleRowPosition(super.getRowPosition() + 1);
+        super.addPossibleRowPosition(super.getRowPosition() - 1);
+        super.addPossibleColPosition(super.getColPosition() + 1);
+        super.addPossibleColPosition(super.getColPosition() - 1);
     }
 
     @Override
     protected void isMoveValid(int row, int col) {
 
+        if (!super.getPossibleRowPositions().contains(row) && !super.getPossibleColPositions().contains(col)) {
+
+            throw new IllegalArgumentException("Invalid move");
+        }
     }
 }
