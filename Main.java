@@ -6,21 +6,21 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Rook rook = new Rook(0, 0);
-        Rook rook2 = new Rook(7, 7);
-        Rook rook3 = new Rook(7, 0);
-        Rook rook1 = new Rook(0, 7);
-        King king = new King(0, 4);
-        Queen queen = new Queen(0, 3);
+        Rook rook = new Rook(0, 0, FigureColor.BLACK);
+        Rook rook2 = new Rook(7, 7, FigureColor.WHITE);
+        Rook rook3 = new Rook(7, 0, FigureColor.WHITE);
+        Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
+        King king = new King(0, 4, FigureColor.BLACK);
+        Queen queen = new Queen(0, 3, FigureColor.BLACK);
         List<Figure> figures = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
 
-            Pawn pawn = new Pawn(1, i);
+            Pawn pawn = new Pawn(1, i, FigureColor.BLACK);
             figures.add(pawn);
         }
         for (int i = 7; i >= 0; i--) {
 
-            Pawn pawn = new Pawn(6, i);
+            Pawn pawn = new Pawn(6, i, FigureColor.WHITE);
             figures.add(pawn);
         }
 
@@ -33,16 +33,16 @@ public class Main {
         figures.add(rook1);
         figures.add(king);
         figures.add(queen);
-        Knight knight = new Knight(0, 1);
-        Knight knight1 = new Knight(0, 6);
-        Knight knight2 = new Knight(7, 1);
-        Knight knight3 = new Knight(7, 6);
+        Knight knight = new Knight(0, 1, FigureColor.BLACK);
+        Knight knight1 = new Knight(0, 6, FigureColor.BLACK);
+        Knight knight2 = new Knight(7, 1, FigureColor.WHITE);
+        Knight knight3 = new Knight(7, 6, FigureColor.WHITE);
         figures.add(knight2);
         figures.add(knight3);
         figures.add(knight);
         figures.add(knight1);
-        Bishop bishop = new Bishop(0, 2);
-        Bishop bishop1 = new Bishop(0, 5);
+        Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
+        Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
         figures.add(bishop);
         figures.add(bishop1);
 

@@ -57,7 +57,7 @@ public class DefaultBoard implements IBoard {
 
                     } else {
 
-                        result.append(figures[row][col].draw(i, color,row));
+                        result.append(figures[row][col].draw(i, color));
                     }
 
 
@@ -102,7 +102,7 @@ public class DefaultBoard implements IBoard {
 
 
         if (figures[rowToMove][colToMove] != null) {
-
+//&& !figures[row][col].getColor().equals(figures[rowToMove][colToMove].getColor()
             figures[row][col].attackSquare(rowToMove, colToMove);
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
@@ -126,6 +126,8 @@ public class DefaultBoard implements IBoard {
         //TODO: Fixed possibleMoves method in King class.
         figures[rowToMove][colToMove] = figures[row][col];
         figures[row][col] = null;
+
+
         drawBoard();
     }
 }

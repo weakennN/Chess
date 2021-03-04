@@ -16,8 +16,8 @@ public class Knight extends Figure {
             "████████n    n█████████"
     };
 
-    public Knight(int rowPosition, int cowPosition) {
-        super(rowPosition, cowPosition);
+    public Knight(int rowPosition, int cowPosition, FigureColor figureColor) {
+        super(rowPosition, cowPosition, figureColor);
     }
 
     @Override
@@ -29,11 +29,13 @@ public class Knight extends Figure {
     }
 
     @Override
-    public String draw(int row, String color, int accRow) {
+    public String draw(int row, String color) {
 
-        if (accRow >= 6) {
+        if (super.getColor().equals(FigureColor.WHITE)) {
+
             return color + whiteFigureDraw[row];
         }
+
 
         return color + blackFigureDraw[row];
     }

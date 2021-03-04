@@ -18,8 +18,8 @@ public class Pawn extends Figure {
 
     private boolean firstMove;
 
-    public Pawn(int rowPosition, int cowPosition) {
-        super(rowPosition, cowPosition);
+    public Pawn(int rowPosition, int cowPosition,FigureColor figureColor) {
+        super(rowPosition, cowPosition,figureColor);
 
         this.firstMove = false;
     }
@@ -35,9 +35,10 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public String draw(int row, String color, int squre) {
+    public String draw(int row, String color) {
 
-        if (squre >= 6) {
+        if (super.getColor().equals(FigureColor.WHITE)) {
+
             return color + whiteFigureDraw[row];
         }
 
@@ -75,7 +76,10 @@ public class Pawn extends Figure {
 
                 super.setCowPosition(cowPosition);
                 super.setRowPosition(rowPosition);
+                return;
             }
         }
+
+        throw new IllegalArgumentException("Invalid move.");
     }
 }

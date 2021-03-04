@@ -16,8 +16,8 @@ public class Rook extends Figure {
             "█████████r    r████████"
     };
 
-    public Rook(int rowPosition, int cowPosition) {
-        super(rowPosition, cowPosition);
+    public Rook(int rowPosition, int cowPosition, FigureColor figureColor) {
+        super(rowPosition, cowPosition, figureColor);
 
     }
 
@@ -31,9 +31,9 @@ public class Rook extends Figure {
     }
 
     @Override
-    public String draw(int row, String color,int square) {
+    public String draw(int row, String color) {
 
-        if (square >= 6){
+        if (super.getColor().equals(FigureColor.WHITE)) {
 
             return color + whiteFigureDraw[row];
         }

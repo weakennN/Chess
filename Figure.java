@@ -7,11 +7,13 @@ public abstract class Figure {
     private int colPosition;
     private List<Integer> possibleRowPositions;
     private List<Integer> possibleColPositions;
+    private FigureColor figureColor;
 
-    public Figure(int rowPosition, int cowPosition) {
+    public Figure(int rowPosition, int cowPosition, FigureColor figureColor) {
 
         setRowPosition(rowPosition);
         setCowPosition(cowPosition);
+        setFigureColor(figureColor);
         this.possibleRowPositions = new ArrayList<>();
         this.possibleColPositions = new ArrayList<>();
     }
@@ -26,7 +28,7 @@ public abstract class Figure {
 
     public abstract void move(int rowPosition, int colPosition);
 
-    public String draw(int row, String color,int smt) {
+    public String draw(int row, String color) {
 
 
         return "";
@@ -69,4 +71,13 @@ public abstract class Figure {
     }
 
     public abstract void attackSquare(int row, int col);
+
+    public void setFigureColor(FigureColor figureColor) {
+        this.figureColor = figureColor;
+    }
+
+    public FigureColor getColor() {
+
+        return this.figureColor;
+    }
 }
