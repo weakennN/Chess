@@ -102,7 +102,7 @@ public class DefaultBoard implements IBoard {
 
 
         if (figures[rowToMove][colToMove] != null) {
-//&& !figures[row][col].getColor().equals(figures[rowToMove][colToMove].getColor()
+
             if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
 
                 throw new IllegalArgumentException("Invalid move.");
