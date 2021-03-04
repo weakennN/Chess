@@ -24,6 +24,9 @@ public class Main {
             figures.add(pawn);
         }
 
+        Player[] players = new Player[2];
+        players[0] = new Player(true, "Pesho");
+        players[1] = new Player(false, "Gosho");
         figures.add(rook);
         figures.add(rook3);
         figures.add(rook2);
@@ -46,7 +49,7 @@ public class Main {
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
-        Game game = new Game(board, null, defaultBoard);
+        Game game = new Game(board, players, defaultBoard);
         defaultBoard.drawBoard();
 
         for (int i = 0; i < 10; i++) {

@@ -57,7 +57,7 @@ public class DefaultBoard implements IBoard {
 
                     } else {
 
-                        result.append(figures[row][col].draw(i, color));
+                        result.append(figures[row][col].draw(i, color,row));
                     }
 
 
@@ -95,12 +95,12 @@ public class DefaultBoard implements IBoard {
 
             figures[figureList.get(i).getRowPosition()][figureList.get(i).getColPosition()] = figureList.get(i);
         }
+
     }
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
 
-        //TODO: check what happen to the rook 1 1 1 5;
         if (figures[rowToMove][colToMove] != null) {
 
             figures[row][col].attackSquare(rowToMove, colToMove);
@@ -123,6 +123,7 @@ public class DefaultBoard implements IBoard {
         figures[row][col].move(rowToMove, colToMove);
         //TODO: Make possibleMoves(); execute it self in the move();
         //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
+        //TODO: Fixed possibleMoves method in King class.
         figures[rowToMove][colToMove] = figures[row][col];
         figures[row][col] = null;
         drawBoard();

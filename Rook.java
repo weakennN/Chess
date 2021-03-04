@@ -1,11 +1,19 @@
 public class Rook extends Figure {
 
-    static final String[] figureDraw = {
+    static final String[] blackFigureDraw = {
             "█████████RRRRRR████████",
             "█████████R    R████████",
             "█████████RRRRRR████████",
             "█████████R   R█████████",
             "█████████R    R████████"
+    };
+
+    static final String[] whiteFigureDraw = {
+            "█████████rrrrrr████████",
+            "█████████r    r████████",
+            "█████████rrrrrr████████",
+            "█████████r   r█████████",
+            "█████████r    r████████"
     };
 
     public Rook(int rowPosition, int cowPosition) {
@@ -23,9 +31,14 @@ public class Rook extends Figure {
     }
 
     @Override
-    public String draw(int row, String color) {
+    public String draw(int row, String color,int square) {
 
-        return color + figureDraw[row];
+        if (square >= 6){
+
+            return color + whiteFigureDraw[row];
+        }
+
+        return color + blackFigureDraw[row];
     }
 
     @Override

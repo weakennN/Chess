@@ -1,11 +1,19 @@
 public class Queen extends Figure {
 
-    static final String[] figureDraw = {
+    static final String[] blackFigureDraw = {
             "██████████QQQQ█████████",
             "█████████Q    Q████████",
             "█████████Q    Q████████",
             "█████████QQQQQQ████████",
             "███████████████Q███████"
+    };
+
+    static final String[] whiteFigureDraw = {
+            "██████████qqqq█████████",
+            "█████████q    q████████",
+            "█████████q    q████████",
+            "█████████qqqqqq████████",
+            "███████████████q███████"
     };
 
     public Queen(int rowPosition, int cowPosition) {
@@ -21,9 +29,14 @@ public class Queen extends Figure {
     }
 
     @Override
-    public String draw(int row, String color) {
+    public String draw(int row, String color,int square) {
 
-        return color + figureDraw[row];
+        if (square >= 6){
+
+            return color + whiteFigureDraw[row];
+        }
+
+        return color + blackFigureDraw[row];
     }
 
     @Override

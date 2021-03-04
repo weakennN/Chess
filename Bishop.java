@@ -1,11 +1,19 @@
 public class Bishop extends Figure {
 
-    static final String[] figureDraw = {
+    static final String[] blackFigureDraw = {
             "███████BBBBBB██████████",
             "███████B    B██████████",
             "███████BBBBBB██████████",
             "███████B    B██████████",
             "███████BBBBBB██████████"
+    };
+
+    static final String[] whiteFigureDraw = {
+            "███████bbbbbb██████████",
+            "███████b    b██████████",
+            "███████bbbbbb██████████",
+            "███████b    b██████████",
+            "███████bbbbbb██████████"
     };
 
     public Bishop(int rowPosition, int cowPosition) {
@@ -21,9 +29,13 @@ public class Bishop extends Figure {
     }
 
     @Override
-    public String draw(int row, String color) {
+    public String draw(int row, String color,int square) {
 
-        return color + figureDraw[row];
+        if (square >= 6) {
+            return color + whiteFigureDraw[row];
+        }
+
+        return color + blackFigureDraw[row];
     }
 
     @Override
@@ -54,7 +66,7 @@ public class Bishop extends Figure {
 
     private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
 
-        for (int row = super.getRowPosition() + rowIncrementer,col = super.getColPosition() + colIncrementer;col >= 0 && row < 8 && col < 8 && row >= 0;row += rowIncrementer,col += colIncrementer){
+        for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
 
             super.addPossibleRowPosition(row);
             super.addPossibleColPosition(col);

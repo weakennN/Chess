@@ -1,11 +1,19 @@
 public class Knight extends Figure {
 
-    static final String[] figureDraw = {
+    static final String[] blackFigureDraw = {
             "████████NN   N█████████",
             "████████N N  N█████████",
             "████████N  N N█████████",
             "████████N   NN█████████",
             "████████N    N█████████"
+    };
+
+    static final String[] whiteFigureDraw = {
+            "████████nn   n█████████",
+            "████████n n  n█████████",
+            "████████n  n n█████████",
+            "████████n   nn█████████",
+            "████████n    n█████████"
     };
 
     public Knight(int rowPosition, int cowPosition) {
@@ -21,9 +29,13 @@ public class Knight extends Figure {
     }
 
     @Override
-    public String draw(int row, String color) {
+    public String draw(int row, String color, int accRow) {
 
-        return color + figureDraw[row];
+        if (accRow >= 6) {
+            return color + whiteFigureDraw[row];
+        }
+
+        return color + blackFigureDraw[row];
     }
 
     @Override
@@ -52,6 +64,6 @@ public class Knight extends Figure {
     @Override
     public void attackSquare(int row, int col) {
 
-
+        this.move(row, col);
     }
 }

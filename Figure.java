@@ -26,7 +26,7 @@ public abstract class Figure {
 
     public abstract void move(int rowPosition, int colPosition);
 
-    public String draw(int row, String color) {
+    public String draw(int row, String color,int smt) {
 
 
         return "";

@@ -11,8 +11,16 @@ public class Game {
         this.defaultBoard = defaultBoard;
     }
 
-    public void play(int figureRow,int figureCol,int rowToMove,int colToMove) {
+    public void play(int figureRow, int figureCol, int rowToMove, int colToMove) {
 
-        defaultBoard.moveFigure(figureRow,figureCol,rowToMove,colToMove);
+        if (players[0].getTurn()) {
+            players[0].setTurn(false);
+            players[1].setTurn(true);
+        } else {
+            players[1].setTurn(false);
+            players[0].setTurn(true);
+        }
+
+        defaultBoard.moveFigure(figureRow, figureCol, rowToMove, colToMove);
     }
 }

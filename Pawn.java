@@ -1,11 +1,19 @@
 public class Pawn extends Figure {
 
-    static final String[] figureDraw = {
+    static final String[] blackFigureDraw = {
             "███████PPPPPPPPP███████",
             "███████P       P███████",
             "███████PPPPPPPPP███████",
             "███████P███████████████",
             "███████P███████████████"
+    };
+
+    static final String[] whiteFigureDraw = {
+            "███████ppppppppp███████",
+            "███████p       p███████",
+            "███████ppppppppp███████",
+            "███████p███████████████",
+            "███████p███████████████"
     };
 
     private boolean firstMove;
@@ -27,9 +35,13 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public String draw(int row, String color) {
+    public String draw(int row, String color, int squre) {
 
-        return color + figureDraw[row];
+        if (squre >= 6) {
+            return color + whiteFigureDraw[row];
+        }
+
+        return color + blackFigureDraw[row];
     }
 
     @Override
