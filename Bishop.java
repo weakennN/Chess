@@ -16,8 +16,8 @@ public class Bishop extends Figure {
             "███████bbbbbb██████████"
     };
 
-    public Bishop(int rowPosition, int cowPosition,FigureColor figureColor) {
-        super(rowPosition, cowPosition,figureColor);
+    public Bishop(int rowPosition, int cowPosition, FigureColor figureColor) {
+        super(rowPosition, cowPosition, figureColor);
     }
 
     @Override

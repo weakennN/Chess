@@ -18,8 +18,8 @@ public class Pawn extends Figure {
 
     private boolean firstMove;
 
-    public Pawn(int rowPosition, int cowPosition,FigureColor figureColor) {
-        super(rowPosition, cowPosition,figureColor);
+    public Pawn(int rowPosition, int cowPosition, FigureColor figureColor) {
+        super(rowPosition, cowPosition, figureColor);
 
         this.firstMove = false;
     }
@@ -70,7 +70,7 @@ public class Pawn extends Figure {
     @Override
     public void attackSquare(int rowPosition, int cowPosition) {
 
-        if (rowPosition - 1 == super.getRowPosition()) {
+        if (rowPosition - 1 == super.getRowPosition() || rowPosition + 1 == super.getRowPosition()) {
 
             if (super.getColPosition() - 1 == cowPosition || super.getColPosition() + 1 == cowPosition) {
 

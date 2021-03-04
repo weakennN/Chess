@@ -26,7 +26,7 @@ public class Main {
 
         Player[] players = new Player[2];
         players[0] = new Player(true, "Pesho");
-        players[1] = new Player(false, "Gosho");
+        players[1] = new Player(false, "Pencho");
         figures.add(rook);
         figures.add(rook3);
         figures.add(rook2);
