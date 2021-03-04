@@ -1,3 +1,4 @@
+package Chess;
 public class Rook extends Figure {
 
     static final String[] blackFigureDraw = {

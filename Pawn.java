@@ -1,3 +1,4 @@
+package Chess;
 public class Pawn extends Figure {
 
     static final String[] blackFigureDraw = {

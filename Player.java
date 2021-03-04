@@ -1,3 +1,4 @@
+package Chess;
 public class Player implements IPlayer {
 
     private String name;

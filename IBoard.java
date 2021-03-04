@@ -1,3 +1,4 @@
+package Chess;
 public interface IBoard {
 
     int fieldWidth = 23;

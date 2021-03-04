@@ -1,3 +1,4 @@
+package Chess;
 public class Queen extends Figure {
 
     static final String[] blackFigureDraw = {

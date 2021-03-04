@@ -1,3 +1,4 @@
+package Chess;
 public class Knight extends Figure {
 
     static final String[] blackFigureDraw = {

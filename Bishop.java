@@ -1,3 +1,5 @@
+package Chess;
+
 public class Bishop extends Figure {
 
     static final String[] blackFigureDraw = {
