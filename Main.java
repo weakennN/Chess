@@ -1,4 +1,5 @@
 package Chess;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,8 +45,12 @@ public class Main {
         figures.add(knight1);
         Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
         Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
+        Bishop bishop2 = new Bishop(7, 2, FigureColor.WHITE);
+        Bishop bishop3 = new Bishop(7, 6, FigureColor.WHITE);
         figures.add(bishop);
         figures.add(bishop1);
+        figures.add(bishop2);
+        figures.add(bishop3);
 
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);

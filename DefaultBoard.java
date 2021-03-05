@@ -131,6 +131,9 @@ public class DefaultBoard implements IBoard {
             if (figures[row][col] instanceof Rook) {
 
                 validator.validateRookMoves(row, col, colToMove, rowToMove);
+            } else if (figures[row][col] instanceof Bishop) {
+
+                validator.validateBishopMoves(row, col, colToMove, rowToMove);
             }
 
             figures[row][col].possibleMoves();
@@ -140,6 +143,8 @@ public class DefaultBoard implements IBoard {
             //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
             //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
             //TODO: Fix isMoveValid method in Rook class.
+            //TODO: create a interface with only one method which is validateMove and make every figure to implemented (maybe).
+            //TODO: fix validateBishopMoves in the Validator class.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
 
