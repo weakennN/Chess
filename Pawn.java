@@ -57,14 +57,16 @@ public class Pawn extends Figure {
                 super.addPossibleColPosition(super.getColPosition());
             } else {
                 super.addPossibleRowPosition(super.getRowPosition() + 1);
+                super.addPossibleColPosition(super.getColPosition());
             }
-        }else {
+        } else {
 
             if (!this.firstMove) {
                 super.addPossibleRowPosition(super.getRowPosition() - 2);
                 super.addPossibleColPosition(super.getColPosition());
             } else {
                 super.addPossibleRowPosition(super.getRowPosition() - 1);
+                super.addPossibleColPosition(super.getColPosition());
             }
         }
 

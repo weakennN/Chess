@@ -69,7 +69,7 @@ public class Rook extends Figure {
 
             throw new IllegalArgumentException("Invalid move,");
         } else if (super.getColPosition() < col && super.getRowPosition() != row) {
-            
+
             throw new IllegalArgumentException("Invalid move,");
         }
 

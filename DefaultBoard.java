@@ -105,45 +105,49 @@ public class DefaultBoard implements IBoard {
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
+        try {
+            if (figures[rowToMove][colToMove] != null) {
 
-        if (figures[rowToMove][colToMove] != null) {
+                if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
 
-            if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
+                    throw new IllegalArgumentException("Invalid move.");
+                }
 
-                throw new IllegalArgumentException("Invalid move.");
+                figures[row][col].attackSquare(rowToMove, colToMove);
+                figures[rowToMove][colToMove] = figures[row][col];
+                figures[row][col] = null;
+                drawBoard();
+                return;
             }
 
-            figures[row][col].attackSquare(rowToMove, colToMove);
+            if (figures[row][col] == null) {
+
+                throw new IllegalArgumentException("Theres no figure at this square.");
+            } else if (rowToMove >= 8 || colToMove >= 8) {
+
+                throw new IllegalArgumentException("Invalid move");
+            }
+
+            if (figures[row][col] instanceof Rook) {
+
+                validator.validateRookMoves(row, col, colToMove, rowToMove);
+            }
+
+            figures[row][col].possibleMoves();
+            figures[row][col].isMoveValid(rowToMove, colToMove);
+            figures[row][col].move(rowToMove, colToMove);
+            //TODO: Make possibleMoves(); execute it self in the move();
+            //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
+            //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
+            //TODO: Fix isMoveValid method in Rook class.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
+
+
             drawBoard();
-            return;
+        } catch (Exception exceptionIgnored) {
+
+            System.out.println(exceptionIgnored.getMessage());
         }
-
-        if (figures[row][col] == null) {
-
-            throw new IllegalArgumentException("Theres no figure at this square.");
-        } else if (rowToMove >= 8 || colToMove >= 8) {
-
-            throw new IllegalArgumentException("Invalid move");
-        }
-
-        if (figures[row][col] instanceof Rook) {
-
-            validator.validateRookMoves(row, col, colToMove, rowToMove);
-        }
-
-        figures[row][col].possibleMoves();
-        figures[row][col].isMoveValid(rowToMove, colToMove);
-        figures[row][col].move(rowToMove, colToMove);
-        //TODO: Make possibleMoves(); execute it self in the move();
-        //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
-        //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
-        //TODO: Fix isMoveValid method in Rook class.
-        figures[rowToMove][colToMove] = figures[row][col];
-        figures[row][col] = null;
-
-
-        drawBoard();
     }
 }
