@@ -138,8 +138,8 @@ public class DefaultBoard implements IBoard {
         figures[row][col].move(rowToMove, colToMove);
         //TODO: Make possibleMoves(); execute it self in the move();
         //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
-        //TODO: Fixed possibleMoves method in King class.
         //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
+        //TODO: Fix isMoveValid method in Rook class.
         figures[rowToMove][colToMove] = figures[row][col];
         figures[row][col] = null;
 

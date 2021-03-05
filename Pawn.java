@@ -50,11 +50,22 @@ public class Pawn extends Figure {
     @Override
     public void possibleMoves() {
 
-        if (!this.firstMove) {
-            super.addPossibleRowPosition(super.getRowPosition() + 2);
-            super.addPossibleColPosition(super.getColPosition());
-        } else {
-            super.addPossibleRowPosition(super.getRowPosition() + 1);
+        if (super.getColor().equals(FigureColor.BLACK)) {
+
+            if (!this.firstMove) {
+                super.addPossibleRowPosition(super.getRowPosition() + 2);
+                super.addPossibleColPosition(super.getColPosition());
+            } else {
+                super.addPossibleRowPosition(super.getRowPosition() + 1);
+            }
+        }else {
+
+            if (!this.firstMove) {
+                super.addPossibleRowPosition(super.getRowPosition() - 2);
+                super.addPossibleColPosition(super.getColPosition());
+            } else {
+                super.addPossibleRowPosition(super.getRowPosition() - 1);
+            }
         }
 
     }

@@ -15,7 +15,7 @@ public class Validator {
 
             verticalMoves(figureRow, figureCol, colToMove, rowToMove, 1);
         } else if (figureRow > rowToMove) {
-            
+
             verticalMoves(figureRow, figureCol, colToMove, rowToMove, -1);
         }
     }

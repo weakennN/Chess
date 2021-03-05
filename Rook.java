@@ -1,4 +1,5 @@
 package Chess;
+
 public class Rook extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -58,12 +59,28 @@ public class Rook extends Figure {
     @Override
     protected void isMoveValid(int row, int col) {
 
-        if (super.getRowPosition() > row || super.getRowPosition() < row && super.getColPosition() != col) {
+        if (super.getRowPosition() < row && super.getColPosition() != col) {
+
+            throw new IllegalArgumentException("Invalid move,");
+        } else if (super.getRowPosition() > row && super.getColPosition() != col) {
+
+            throw new IllegalArgumentException("Invalid move,");
+        } else if (super.getColPosition() > col && super.getRowPosition() != row) {
+
+            throw new IllegalArgumentException("Invalid move,");
+        } else if (super.getColPosition() < col && super.getRowPosition() != row) {
+            
+            throw new IllegalArgumentException("Invalid move,");
+        }
+
+       /* if (super.getRowPosition() > row || super.getRowPosition() < row && super.getColPosition() != col) {
 
             throw new IllegalArgumentException("Invalid move,");
         } else if (super.getColPosition() > col || super.getColPosition() < col && super.getRowPosition() != row) {
             throw new IllegalArgumentException("Invalid move,");
         }
+
+        */
 
      /*   if (super.getRowPosition() < row && super.getColPosition() < col) {
             throw new IllegalArgumentException("Invalid move");
