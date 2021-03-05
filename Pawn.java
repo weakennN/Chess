@@ -1,4 +1,5 @@
 package Chess;
+
 public class Pawn extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -61,7 +62,7 @@ public class Pawn extends Figure {
     @Override
     protected void isMoveValid(int row, int col) {
 
-        if (!super.getPossibleRowPositions().contains(row) && !super.getPossibleColPositions().contains(col)) {
+        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
 
             throw new IllegalArgumentException("Invalid move.");
         }
