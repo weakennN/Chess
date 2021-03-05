@@ -22,7 +22,7 @@ public class Validator {
 
     private void verticalMoves(int figureRow, int figureCol, int colToMove, int rowToMove, int incrementer) {
 
-        for (int i = figureRow + 1; i < rowToMove; i += incrementer) {
+        for (int i = figureRow - 1; i > rowToMove; i += incrementer) {
 
             if (figures[i][figureCol] != null) {
 
