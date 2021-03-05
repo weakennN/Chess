@@ -1,4 +1,5 @@
 package Chess;
+
 import java.util.List;
 
 public class DefaultBoard implements IBoard {
@@ -6,10 +7,13 @@ public class DefaultBoard implements IBoard {
     final int boardWidth = 8;
     final int boardHeight = 8;
     private Figure[][] figures;
+    private Validator validator;
 
     public DefaultBoard() {
 
         this.figures = new Figure[boardHeight][boardWidth];
+        this.validator = new Validator(figures);
+
     }
 
     @Override
@@ -124,12 +128,18 @@ public class DefaultBoard implements IBoard {
             throw new IllegalArgumentException("Invalid move");
         }
 
+        if (figures[row][col] instanceof Rook) {
+
+            validator.validateRookMoves(row, col, colToMove, rowToMove);
+        }
+
         figures[row][col].possibleMoves();
         figures[row][col].isMoveValid(rowToMove, colToMove);
         figures[row][col].move(rowToMove, colToMove);
         //TODO: Make possibleMoves(); execute it self in the move();
         //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
         //TODO: Fixed possibleMoves method in King class.
+        //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
         figures[rowToMove][colToMove] = figures[row][col];
         figures[row][col] = null;
 
