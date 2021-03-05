@@ -142,9 +142,9 @@ public class DefaultBoard implements IBoard {
             //TODO: Make possibleMoves(); execute it self in the move();
             //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.
             //TODO: for loop which loops though either row or cols and check if there is a "friendly figure ot enemy figure" in the way.
-            //TODO: Fix isMoveValid method in Rook class.
             //TODO: create a interface with only one method which is validateMove and make every figure to implemented (maybe).
             //TODO: fix validateBishopMoves in the Validator class.
+            //TODO: Fix isMoveValid method in Rook class.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
 

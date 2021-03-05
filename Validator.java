@@ -11,34 +11,49 @@ public class Validator {
 
     public void validateRookMoves(int figureRow, int figureCol, int colToMove, int rowToMove) {
 
-        if (figures[figureRow][figureCol].getColor().equals(FigureColor.BLACK)) {
-            if (figureRow < rowToMove) {
+        // if (figures[figureRow][figureCol].getColor().equals(FigureColor.BLACK)) {
+        if (figureRow < rowToMove) {
 
-                verticalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1);
-            } else if (figureRow > rowToMove) {
+            verticalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1);
+        } else if (figureRow > rowToMove) {
 
-                verticalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, -1);
-            } else if (figureCol > colToMove) {
+            verticalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1);
+        } else if (figureCol > colToMove) {
 
-                horizontalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, -1);
-            } else if (figureCol < colToMove) {
+            horizontalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1);
+        } else if (figureCol < colToMove) {
 
-                horizontalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1);
-            }
-        } else {
+            horizontalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1);
+        }
+    }
 
-            if (figureRow < rowToMove) {
+    public void validateBishopMoves(int figureRow, int figureCol, int colToMove, int rowToMove) {
 
-                verticalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, 1);
-            } else if (figureRow > rowToMove) {
 
-                verticalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1);
-            } else if (figureCol > colToMove) {
+        if (figureRow > rowToMove && figureCol < colToMove) {
 
-                horizontalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1);
-            } else if (figureCol < colToMove) {
+            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, -1, 1);
+        } else if (figureRow > rowToMove && figureCol > colToMove) {
 
-                horizontalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, 1);
+            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, -1, -1);
+        } else if (figureRow < rowToMove && figureCol > colToMove) {
+
+            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, 1, -1);
+        } else if (figureRow < rowToMove && figureCol < colToMove) {
+
+            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, 1, 1);
+        }
+
+
+    }
+
+    public void diagonalMoves(int figureRow, int figureCol, int colToMove, int rowToMove, int rowIncrementer, int colIncrementer) {
+
+        for (int i = figureRow + rowIncrementer, j = figureCol + colIncrementer; i < rowToMove && i >= 0 && j < colToMove && j >= 0; i += rowIncrementer, j += colIncrementer) {
+
+            if (figures[i][j] != null) {
+
+                throw new IllegalArgumentException("There is a figure in the way.");
             }
         }
     }
@@ -49,7 +64,7 @@ public class Validator {
 
             if (figures[i][figureCol] != null) {
 
-                throw new IllegalArgumentException("Theres a figure in the way.");
+                throw new IllegalArgumentException("There is a figure in the way.");
             }
         }
     }
@@ -60,7 +75,7 @@ public class Validator {
 
             if (figures[i][figureCol] != null) {
 
-                throw new IllegalArgumentException("Theres a figure in the way.");
+                throw new IllegalArgumentException("There is a figure in the way.");
             }
         }
     }
@@ -71,7 +86,7 @@ public class Validator {
 
             if (figures[figureRow][i] != null) {
 
-                throw new IllegalArgumentException("Theres a figure in the way.");
+                throw new IllegalArgumentException("There is a figure in the way.");
             }
         }
     }
@@ -82,7 +97,7 @@ public class Validator {
 
             if (figures[figureRow][i] != null) {
 
-                throw new IllegalArgumentException("Theres a figure in the way.");
+                throw new IllegalArgumentException("There is a figure in the way.");
             }
         }
     }
