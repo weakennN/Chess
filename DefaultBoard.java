@@ -113,6 +113,9 @@ public class DefaultBoard implements IBoard {
             } else if (figures[row][col] instanceof Bishop) {
 
                 validator.validateBishopMoves(row, col, colToMove, rowToMove);
+            } else if (figures[row][col] instanceof Queen) {
+
+                validator.validateQueenMoves(row, col, colToMove, rowToMove);
             }
 
 
@@ -147,7 +150,7 @@ public class DefaultBoard implements IBoard {
             //TODO: create a interface with only one method which is validateMove and make every figure to implemented (maybe).
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
-            
+
             drawBoard();
         } catch (Exception exceptionIgnored) {
 
