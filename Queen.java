@@ -1,4 +1,5 @@
 package Chess;
+
 public class Queen extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -43,33 +44,44 @@ public class Queen extends Figure {
     @Override
     public void possibleMoves() {
 
-      /*  super.addPossibleRowPosition(super.getRowPosition() + 1);
-        super.addPossibleRowPosition(super.getRowPosition() - 1);
-        super.addPossibleColPosition(super.getColPosition() + 1);
-        super.addPossibleColPosition(super.getColPosition() - 1);
+        possibleVerticalMoves(1);
+        possibleVerticalMoves(-1);
+        possibleHorizontalMoves(1);
+        possibleHorizontalMoves(-1);
 
-       */
-    }
-
-   /* @Override
-    protected void isMoveValid(Position position) {
-
-      if (super.getRowPosition() > row || super.getRowPosition() < row && super.getColPosition() != col && !super.getPossibleColPositions().contains(col)) {
-
-            throw new IllegalArgumentException("Invalid move,");
-        } else if (super.getColPosition() > col || super.getColPosition() < col && super.getRowPosition() != row && !super.getPossibleRowPositions().contains(row)) {
-            throw new IllegalArgumentException("Invalid move,");
-        }
-
+        addPossibleDiagonalMoves(1, 1);
+        addPossibleDiagonalMoves(-1, 1);
+        addPossibleDiagonalMoves(-1, -1);
+        addPossibleDiagonalMoves(1, -1);
 
     }
-
-    */
-
 
     @Override
     public void attackSquare(int row, int col) {
 
         this.move(row, col);
+    }
+    
+    private void possibleVerticalMoves(int incrementer) {
+
+        for (int i = super.getRowPosition(); i < 8 && i >= 0; i += incrementer) {
+            super.addPossiblePosition(new Position(i, super.getColPosition()));
+        }
+    }
+
+    private void possibleHorizontalMoves(int incrementer) {
+
+        for (int i = super.getColPosition(); i < 8 && i >= 0; i += incrementer) {
+            super.addPossiblePosition(new Position(super.getRowPosition(), i));
+        }
+    }
+
+    private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
+
+        for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
+
+            Position position = new Position(row, col);
+            super.addPossiblePosition(position);
+        }
     }
 }

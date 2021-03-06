@@ -1,6 +1,7 @@
 package Chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +20,10 @@ public class Main {
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
         King king = new King(0, 4, FigureColor.BLACK);
         Queen queen = new Queen(0, 3, FigureColor.BLACK);
+        Queen queen1 = new Queen(7, 3, FigureColor.WHITE);
+        King king1 = new King(7, 4, FigureColor.WHITE);
+        figures.add(king1);
+        figures.add(queen1);
 
         for (int i = 0; i < 8; i++) {
 
@@ -49,7 +54,7 @@ public class Main {
         Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
         Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
         Bishop bishop2 = new Bishop(7, 2, FigureColor.WHITE);
-        Bishop bishop3 = new Bishop(7, 6, FigureColor.WHITE);
+        Bishop bishop3 = new Bishop(7, 5, FigureColor.WHITE);
         figures.add(bishop);
         figures.add(bishop1);
         figures.add(bishop2);
@@ -58,6 +63,8 @@ public class Main {
         figures.add(bishop1);
         figures.add(bishop2);
         figures.add(bishop3);
+
+
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
