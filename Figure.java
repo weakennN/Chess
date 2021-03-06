@@ -1,22 +1,21 @@
 package Chess;
-import java.util.ArrayList;
+
+
 import java.util.List;
 
 public abstract class Figure {
 
     private int rowPosition;
     private int colPosition;
-    private List<Integer> possibleRowPositions;
-    private List<Integer> possibleColPositions;
     private FigureColor figureColor;
+    private PossiblePosition possiblePosition;
 
     public Figure(int rowPosition, int cowPosition, FigureColor figureColor) {
 
         setRowPosition(rowPosition);
         setCowPosition(cowPosition);
         setFigureColor(figureColor);
-        this.possibleRowPositions = new ArrayList<>();
-        this.possibleColPositions = new ArrayList<>();
+        this.possiblePosition = new PossiblePosition();
     }
 
     public void setRowPosition(int rowPosition) {
@@ -43,32 +42,18 @@ public abstract class Figure {
         return colPosition;
     }
 
-    protected void addPossibleRowPosition(int row) {
+    protected void addPossiblePosition(Position position) {
 
-        this.possibleRowPositions.add(row);
-    }
-
-    protected void addPossibleColPosition(int col) {
-
-        this.possibleColPositions.add(col);
-    }
-
-    public List<Integer> getPossibleRowPositions() {
-        return possibleRowPositions;
-    }
-
-    public List<Integer> getPossibleColPositions() {
-        return possibleColPositions;
+        this.possiblePosition.addPosition(position);
     }
 
     public abstract void possibleMoves();
 
-    protected abstract void isMoveValid(int row, int col);
+    protected abstract void isMoveValid(Position position);
 
     protected void emptyMoves() {
 
-        this.possibleRowPositions.clear();
-        this.possibleColPositions.clear();
+        this.possiblePosition.getPositionList().clear();
     }
 
     public abstract void attackSquare(int row, int col);
@@ -80,5 +65,20 @@ public abstract class Figure {
     public FigureColor getColor() {
 
         return this.figureColor;
+    }
+
+    public boolean validateMove(Position position) {
+
+        List<Position> positionList = this.possiblePosition.getPositionList();
+
+        for (int i = 0; i < positionList.size(); i++) {
+
+            if (positionList.get(i).getRow() == position.getRow() && positionList.get(i).getCol() == position.getCol()) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

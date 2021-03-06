@@ -1,4 +1,5 @@
 package Chess;
+
 public class King extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -17,8 +18,8 @@ public class King extends Figure {
             "█████████k  k██████████"
     };
 
-    public King(int rowPosition, int cowPosition,FigureColor figureColor) {
-        super(rowPosition, cowPosition,figureColor);
+    public King(int rowPosition, int cowPosition, FigureColor figureColor) {
+        super(rowPosition, cowPosition, figureColor);
     }
 
     @Override
@@ -43,18 +44,32 @@ public class King extends Figure {
     @Override
     public void possibleMoves() {
 
-        super.addPossibleRowPosition(super.getRowPosition() + 1);
-        super.addPossibleRowPosition(super.getRowPosition() - 1);
-        super.addPossibleColPosition(super.getColPosition() + 1);
-        super.addPossibleColPosition(super.getColPosition() - 1);
+        Position position = new Position(super.getRowPosition() + 1, super.getColPosition() + 1);
+        Position position1 = new Position(super.getRowPosition() + 1, super.getColPosition() - 1);
+        Position position2 = new Position(super.getRowPosition() + 1, super.getColPosition());
+        Position position3 = new Position(super.getRowPosition() - 1, super.getColPosition() + 1);
+        Position position4 = new Position(super.getRowPosition() - 1, super.getColPosition());
+        Position position5 = new Position(super.getRowPosition() - 1, super.getColPosition() - 1);
+        Position position6 = new Position(super.getRowPosition(), super.getColPosition() + 1);
+        Position position7 = new Position(super.getRowPosition(), super.getColPosition() - 1);
+
+        super.addPossiblePosition(position);
+        super.addPossiblePosition(position1);
+        super.addPossiblePosition(position2);
+        super.addPossiblePosition(position3);
+        super.addPossiblePosition(position4);
+        super.addPossiblePosition(position5);
+        super.addPossiblePosition(position6);
+        super.addPossiblePosition(position7);
+
     }
 
     @Override
-    protected void isMoveValid(int row, int col) {
+    protected void isMoveValid(Position position) {
 
-        if (!super.getPossibleRowPositions().contains(row) && !super.getPossibleColPositions().contains(col)) {
+        if (!super.validateMove(position)) {
 
-            throw new IllegalArgumentException("Invalid move");
+            throw new IllegalArgumentException("Invalid move!!!!!");
         }
     }
 

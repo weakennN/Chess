@@ -8,13 +8,18 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        List<Figure> figures = new ArrayList<>();
+        Player[] players = new Player[2];
+        players[0] = new Player(true, "Pesho");
+        players[1] = new Player(false, "Pencho");
+
         Rook rook = new Rook(0, 0, FigureColor.BLACK);
         Rook rook2 = new Rook(7, 7, FigureColor.WHITE);
         Rook rook3 = new Rook(7, 0, FigureColor.WHITE);
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
         King king = new King(0, 4, FigureColor.BLACK);
         Queen queen = new Queen(0, 3, FigureColor.BLACK);
-        List<Figure> figures = new ArrayList<>();
+
         for (int i = 0; i < 8; i++) {
 
             Pawn pawn = new Pawn(1, i, FigureColor.BLACK);
@@ -26,9 +31,7 @@ public class Main {
             figures.add(pawn);
         }
 
-        Player[] players = new Player[2];
-        players[0] = new Player(true, "Pesho");
-        players[1] = new Player(false, "Pencho");
+
         figures.add(rook);
         figures.add(rook3);
         figures.add(rook2);
@@ -51,12 +54,16 @@ public class Main {
         figures.add(bishop1);
         figures.add(bishop2);
         figures.add(bishop3);
-
+        figures.add(bishop);
+        figures.add(bishop1);
+        figures.add(bishop2);
+        figures.add(bishop3);
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
         Game game = new Game(board, players, defaultBoard);
         defaultBoard.drawBoard();
+
 
         for (int i = 0; i < 10; i++) {
 

@@ -1,5 +1,7 @@
 package Chess;
 
+import java.util.ArrayList;
+
 public class Bishop extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -20,6 +22,8 @@ public class Bishop extends Figure {
 
     public Bishop(int rowPosition, int cowPosition, FigureColor figureColor) {
         super(rowPosition, cowPosition, figureColor);
+
+
     }
 
     @Override
@@ -47,19 +51,18 @@ public class Bishop extends Figure {
         addPossibleDiagonalMoves(1, 1);
         addPossibleDiagonalMoves(-1, 1);
         addPossibleDiagonalMoves(-1, -1);
-        addPossibleDiagonalMoves(1, 1);
+        addPossibleDiagonalMoves(1, -1);
 
     }
 
+
     @Override
-    protected void isMoveValid(int row, int col) {
+    protected void isMoveValid(Position position) {
 
+        if (!super.validateMove(position)) {
 
-        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
-
-            throw new IllegalArgumentException("Invalid move");
+            throw new IllegalArgumentException("Invalid move!!!!!!!!!");
         }
-
     }
 
     @Override
@@ -70,9 +73,9 @@ public class Bishop extends Figure {
     private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
 
         for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
-
-            super.addPossibleRowPosition(row);
-            super.addPossibleColPosition(col);
+            
+            Position position = new Position(row, col);
+            super.addPossiblePosition(position);
         }
     }
 }

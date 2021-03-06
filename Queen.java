@@ -43,21 +43,25 @@ public class Queen extends Figure {
     @Override
     public void possibleMoves() {
 
-        super.addPossibleRowPosition(super.getRowPosition() + 1);
+      /*  super.addPossibleRowPosition(super.getRowPosition() + 1);
         super.addPossibleRowPosition(super.getRowPosition() - 1);
         super.addPossibleColPosition(super.getColPosition() + 1);
         super.addPossibleColPosition(super.getColPosition() - 1);
+
+       */
     }
 
     @Override
-    protected void isMoveValid(int row, int col) {
+    protected void isMoveValid(Position position) {
 
-        if (super.getRowPosition() > row || super.getRowPosition() < row && super.getColPosition() != col && !super.getPossibleColPositions().contains(col)) {
+     /* if (super.getRowPosition() > row || super.getRowPosition() < row && super.getColPosition() != col && !super.getPossibleColPositions().contains(col)) {
 
             throw new IllegalArgumentException("Invalid move,");
         } else if (super.getColPosition() > col || super.getColPosition() < col && super.getRowPosition() != row && !super.getPossibleRowPositions().contains(row)) {
             throw new IllegalArgumentException("Invalid move,");
         }
+
+      */
     }
 
     @Override

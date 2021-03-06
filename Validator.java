@@ -11,7 +11,6 @@ public class Validator {
 
     public void validateRookMoves(int figureRow, int figureCol, int colToMove, int rowToMove) {
 
-        // if (figures[figureRow][figureCol].getColor().equals(FigureColor.BLACK)) {
         if (figureRow < rowToMove) {
 
             verticalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1);
@@ -29,27 +28,37 @@ public class Validator {
 
     public void validateBishopMoves(int figureRow, int figureCol, int colToMove, int rowToMove) {
 
-
         if (figureRow > rowToMove && figureCol < colToMove) {
 
-            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, -1, 1);
+            diagonalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1, 1);
         } else if (figureRow > rowToMove && figureCol > colToMove) {
 
-            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, -1, -1);
+            diagonalMovesForWhite(figureRow, figureCol, colToMove, rowToMove, -1, -1);
         } else if (figureRow < rowToMove && figureCol > colToMove) {
 
-            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, 1, -1);
+            diagonalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1, -1);
         } else if (figureRow < rowToMove && figureCol < colToMove) {
 
-            diagonalMoves(figureRow, figureCol, colToMove, rowToMove, 1, 1);
+            diagonalMovesForBlack(figureRow, figureCol, colToMove, rowToMove, 1, 1);
         }
 
 
     }
 
-    public void diagonalMoves(int figureRow, int figureCol, int colToMove, int rowToMove, int rowIncrementer, int colIncrementer) {
+    public void diagonalMovesForBlack(int figureRow, int figureCol, int colToMove, int rowToMove, int rowIncrementer, int colIncrementer) {
 
-        for (int i = figureRow + rowIncrementer, j = figureCol + colIncrementer; i < rowToMove && i >= 0 && j < colToMove && j >= 0; i += rowIncrementer, j += colIncrementer) {
+        for (int i = figureRow + rowIncrementer, j = figureCol + colIncrementer; i < rowToMove && i >= 0 && j >= 0; i += rowIncrementer, j += colIncrementer) {
+
+            if (figures[i][j] != null) {
+
+                throw new IllegalArgumentException("There is a figure in the way.");
+            }
+        }
+    }
+
+    public void diagonalMovesForWhite(int figureRow, int figureCol, int colToMove, int rowToMove, int rowIncrementer, int colIncrementer) {
+
+        for (int i = figureRow + rowIncrementer, j = figureCol + colIncrementer; i > rowToMove && i >= 0 && j > colToMove && j >= 0; i += rowIncrementer, j += colIncrementer) {
 
             if (figures[i][j] != null) {
 

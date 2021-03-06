@@ -29,7 +29,7 @@ public class Pawn extends Figure {
     @Override
     public void move(int rowPosition, int cowPosition) {
 
-        isMoveValid(rowPosition, cowPosition);
+        //  isMoveValid(rowPosition, cowPosition);
         this.firstMove = true;
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
@@ -50,10 +50,10 @@ public class Pawn extends Figure {
     @Override
     public void possibleMoves() {
 
-        if (super.getColor().equals(FigureColor.BLACK)) {
 
-            if (!this.firstMove) {
-                super.addPossibleRowPosition(super.getRowPosition() + 2);
+
+            /*if (!this.firstMove) {
+               super.addPossibleRowPosition(super.getRowPosition() + 2);
                 super.addPossibleColPosition(super.getColPosition());
                 super.addPossibleRowPosition(super.getRowPosition() + 1);
                 super.addPossibleColPosition(super.getColPosition());
@@ -74,20 +74,81 @@ public class Pawn extends Figure {
             }
         }
 
+             */
+
+        if (super.getColor().equals(FigureColor.BLACK)) {
+
+            if (!this.firstMove) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition()));
+                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
+            } else {
+                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
+            }
+        } else {
+
+            if (!this.firstMove) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition()));
+                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
+            } else {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
+            }
+        }
     }
 
-    @Override
-    protected void isMoveValid(int row, int col) {
 
-        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
+
+       /* @Override
+        protected void isMoveValid (Position po){
+
+
+       /* if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
+
+            throw new IllegalArgumentException("Invalid move");
+        }
+
+
+
+            if (!super.validateMove(position)) {
+
+                throw new IllegalArgumentException("Invalid move!!!!!!!!!");
+            }
+        }
+
+        @Override
+        public void attackSquare ( int rowPosition, int cowPosition){
+
+            if (rowPosition - 1 == super.getRowPosition() || rowPosition + 1 == super.getRowPosition()) {
+
+                if (super.getColPosition() - 1 == cowPosition || super.getColPosition() + 1 == cowPosition) {
+
+                    super.setCowPosition(cowPosition);
+                    super.setRowPosition(rowPosition);
+                    return;
+                }
+            }
 
             throw new IllegalArgumentException("Invalid move.");
         }
+    }
 
+        */
+
+    @Override
+    protected void isMoveValid(Position position) {
+
+
+        if (!super.validateMove(position)) {
+
+            throw new IllegalArgumentException("Invalid move!!!!!!!!!");
+        }
     }
 
     @Override
     public void attackSquare(int rowPosition, int cowPosition) {
+
 
         if (rowPosition - 1 == super.getRowPosition() || rowPosition + 1 == super.getRowPosition()) {
 
@@ -101,4 +162,5 @@ public class Pawn extends Figure {
 
         throw new IllegalArgumentException("Invalid move.");
     }
+
 }

@@ -106,6 +106,16 @@ public class DefaultBoard implements IBoard {
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
         try {
+
+            if (figures[row][col] instanceof Rook) {
+
+                validator.validateRookMoves(row, col, colToMove, rowToMove);
+            } else if (figures[row][col] instanceof Bishop) {
+
+                validator.validateBishopMoves(row, col, colToMove, rowToMove);
+            }
+
+
             if (figures[rowToMove][colToMove] != null) {
 
                 if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
@@ -128,16 +138,10 @@ public class DefaultBoard implements IBoard {
                 throw new IllegalArgumentException("Invalid move");
             }
 
-            if (figures[row][col] instanceof Rook) {
-
-                validator.validateRookMoves(row, col, colToMove, rowToMove);
-            } else if (figures[row][col] instanceof Bishop) {
-
-                validator.validateBishopMoves(row, col, colToMove, rowToMove);
-            }
+            Position position = new Position(rowToMove, colToMove);
 
             figures[row][col].possibleMoves();
-            figures[row][col].isMoveValid(rowToMove, colToMove);
+            figures[row][col].isMoveValid(position);
             figures[row][col].move(rowToMove, colToMove);
             //TODO: Make possibleMoves(); execute it self in the move();
             //TODO: Make a validateMoveMethod which takes the figure matrix an checks if theres a figure on the way of the other.

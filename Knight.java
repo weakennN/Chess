@@ -1,4 +1,5 @@
 package Chess;
+
 public class Knight extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -44,23 +45,22 @@ public class Knight extends Figure {
     @Override
     public void possibleMoves() {
 
-        super.addPossibleRowPosition(super.getRowPosition() - 2);
-        super.addPossibleRowPosition(super.getRowPosition() + 2);
-        super.addPossibleColPosition(super.getColPosition() + 1);
-        super.addPossibleColPosition(super.getColPosition() - 1);
-        super.addPossibleRowPosition(super.getRowPosition() + 1);
-        super.addPossibleRowPosition(super.getRowPosition() - 1);
-        super.addPossibleColPosition(super.getColPosition() + 2);
-        super.addPossibleColPosition(super.getColPosition() - 2);
-
+        super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition() + 1));
+        super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition() - 1));
+        super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() + 2));
+        super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() - 2));
+        super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() + 2));
+        super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() - 2));
+        super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition() + 1));
+        super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition() - 1));
     }
 
     @Override
-    protected void isMoveValid(int row, int col) {
+    protected void isMoveValid(Position position) {
 
-        if (!super.getPossibleRowPositions().contains(row) || !super.getPossibleColPositions().contains(col)) {
+        if (!super.validateMove(position)) {
 
-            throw new IllegalArgumentException("Invalid move.");
+            throw new IllegalArgumentException("Invalid move!!!!!!!!!");
         }
     }
 
