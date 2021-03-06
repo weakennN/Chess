@@ -56,6 +56,7 @@ public class Rook extends Figure {
     @Override
     public void attackSquare(int row, int col) {
 
+        this.move(row, col);
     }
 
     private void possibleVerticalMoves(int incrementer) {

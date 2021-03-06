@@ -1,4 +1,5 @@
 package Chess;
+
 public class Game {
 
     private Board board;
