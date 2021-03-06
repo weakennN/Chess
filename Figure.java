@@ -49,7 +49,13 @@ public abstract class Figure {
 
     public abstract void possibleMoves();
 
-    protected abstract void isMoveValid(Position position);
+    protected void isMoveValid(Position position) {
+
+        if (!this.validateMove(position)) {
+
+            throw new IllegalArgumentException("Invalid move!!");
+        }
+    }
 
     protected void emptyMoves() {
 

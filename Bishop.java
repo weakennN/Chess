@@ -1,7 +1,5 @@
 package Chess;
 
-import java.util.ArrayList;
-
 public class Bishop extends Figure {
 
     static final String[] blackFigureDraw = {
@@ -55,16 +53,6 @@ public class Bishop extends Figure {
 
     }
 
-
-    @Override
-    protected void isMoveValid(Position position) {
-
-        if (!super.validateMove(position)) {
-
-            throw new IllegalArgumentException("Invalid move!!!!!!!!!");
-        }
-    }
-
     @Override
     public void attackSquare(int row, int col) {
 
@@ -73,7 +61,7 @@ public class Bishop extends Figure {
     private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
 
         for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
-            
+
             Position position = new Position(row, col);
             super.addPossiblePosition(position);
         }

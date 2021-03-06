@@ -56,15 +56,6 @@ public class Knight extends Figure {
     }
 
     @Override
-    protected void isMoveValid(Position position) {
-
-        if (!super.validateMove(position)) {
-
-            throw new IllegalArgumentException("Invalid move!!!!!!!!!");
-        }
-    }
-
-    @Override
     public void attackSquare(int row, int col) {
 
         this.move(row, col);
