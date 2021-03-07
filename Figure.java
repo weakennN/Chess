@@ -73,6 +73,10 @@ public abstract class Figure {
         return this.figureColor;
     }
 
+    public List<Position> getPossiblePositions() {
+        return possiblePosition.getPositionList();
+    }
+
     public boolean validateMove(Position position) {
 
         List<Position> positionList = this.possiblePosition.getPositionList();

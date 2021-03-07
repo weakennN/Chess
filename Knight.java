@@ -44,7 +44,7 @@ public class Knight extends Figure {
 
     @Override
     public void possibleMoves() {
-
+        
         super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition() + 1));
         super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition() - 1));
         super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() + 2));

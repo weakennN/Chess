@@ -14,7 +14,7 @@ public class Main {
         players[0] = new Player(true, "Pesho");
         players[1] = new Player(false, "Pencho");
 
-        Rook rook = new Rook(0, 0, FigureColor.BLACK);
+      /*  Rook rook = new Rook(0, 0, FigureColor.BLACK);
         Rook rook2 = new Rook(7, 7, FigureColor.WHITE);
         Rook rook3 = new Rook(7, 0, FigureColor.WHITE);
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
@@ -59,11 +59,19 @@ public class Main {
         figures.add(bishop1);
         figures.add(bishop2);
         figures.add(bishop3);
+
+
+       */
+        Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
+        Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
+        Bishop bishop2 = new Bishop(7, 2, FigureColor.WHITE);
+        Bishop bishop3 = new Bishop(7, 5, FigureColor.WHITE);
         figures.add(bishop);
         figures.add(bishop1);
         figures.add(bishop2);
         figures.add(bishop3);
-
+        King king = new King(0, 4, FigureColor.BLACK);
+        figures.add(king);
 
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
