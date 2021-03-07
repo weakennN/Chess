@@ -154,7 +154,7 @@ public class DefaultBoard implements IBoard {
             figures[row][col] = null;
 
             drawBoard();
-            if (isInCheck(figures[rowToMove][colToMove], figures[BlackKingPositions.row][BlackKingPositions.col])) {
+            if (isInCheck(figures[rowToMove][colToMove])) {
 
                 System.out.println("it works");
             }
@@ -163,9 +163,9 @@ public class DefaultBoard implements IBoard {
 
             System.out.println(exceptionIgnored.getMessage());
         }
-     }
+    }
 
-    private boolean isInCheck(Figure figure, Figure king) {
+    private boolean isInCheck(Figure figure) {
 
         figure.possibleMoves();
         List<Position> currentFigurePossibleMoves = figure.getPossiblePositions();
@@ -174,18 +174,18 @@ public class DefaultBoard implements IBoard {
 
             for (int i = 0; i < currentFigurePossibleMoves.size(); i++) {
 
-                if (currentFigurePossibleMoves.get(i).getRow() == 0 && currentFigurePossibleMoves.get(i).getCol() == 4) {
+                if (currentFigurePossibleMoves.get(i).getRow() == BlackKingPositions.row && currentFigurePossibleMoves.get(i).getCol() == BlackKingPositions.col) {
 
                     try {
                         if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Rook) {
 
-                            validator.validateRookMoves(figure.getRowPosition(), figure.getColPosition(), 4, 0);
+                            validator.validateRookMoves(figure.getRowPosition(), figure.getColPosition(), BlackKingPositions.col, BlackKingPositions.row);
                         } else if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Bishop) {
 
-                            validator.validateBishopMoves(figure.getRowPosition(), figure.getColPosition(), 4, 0);
+                            validator.validateBishopMoves(figure.getRowPosition(), figure.getColPosition(), BlackKingPositions.col, BlackKingPositions.row);
                         } else if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Queen) {
 
-                            validator.validateQueenMoves(figure.getRowPosition(), figure.getColPosition(), 4, 0);
+                            validator.validateQueenMoves(figure.getRowPosition(), figure.getColPosition(), BlackKingPositions.col, BlackKingPositions.row);
                         }
                     } catch (Exception exception) {
 
@@ -198,8 +198,23 @@ public class DefaultBoard implements IBoard {
 
             for (int i = 0; i < currentFigurePossibleMoves.size(); i++) {
 
-                if (currentFigurePossibleMoves.get(i).getRow() == 7 && currentFigurePossibleMoves.get(i).getCol() == 4) {
+                if (currentFigurePossibleMoves.get(i).getRow() == WhiteKingPositions.row && currentFigurePossibleMoves.get(i).getCol() == WhiteKingPositions.col) {
 
+                    try {
+                        if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Rook) {
+
+                            validator.validateRookMoves(figure.getRowPosition(), figure.getColPosition(), WhiteKingPositions.col, WhiteKingPositions.row);
+                        } else if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Bishop) {
+
+                            validator.validateBishopMoves(figure.getRowPosition(), figure.getColPosition(), WhiteKingPositions.col, WhiteKingPositions.row);
+                        } else if (figures[figure.getRowPosition()][figure.getColPosition()] instanceof Queen) {
+
+                            validator.validateQueenMoves(figure.getRowPosition(), figure.getColPosition(), WhiteKingPositions.col, WhiteKingPositions.row);
+                        }
+                    } catch (Exception exception) {
+
+                        return false;
+                    }
                     return true;
                 }
             }

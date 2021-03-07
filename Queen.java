@@ -27,6 +27,7 @@ public class Queen extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions());
         super.emptyMoves();
     }
 
@@ -61,18 +62,22 @@ public class Queen extends Figure {
 
         this.move(row, col);
     }
-    
+
     private void possibleVerticalMoves(int incrementer) {
 
         for (int i = super.getRowPosition(); i < 8 && i >= 0; i += incrementer) {
-            super.addPossiblePosition(new Position(i, super.getColPosition()));
+            Position position = new Position(i, super.getColPosition());
+            super.addPossiblePosition(position);
+            AttackedSquares.addAttackedSquares(position);
         }
     }
 
     private void possibleHorizontalMoves(int incrementer) {
 
         for (int i = super.getColPosition(); i < 8 && i >= 0; i += incrementer) {
-            super.addPossiblePosition(new Position(super.getRowPosition(), i));
+            Position position = new Position(super.getRowPosition(), i);
+            super.addPossiblePosition(position);
+            AttackedSquares.addAttackedSquares(position);
         }
     }
 
@@ -82,6 +87,7 @@ public class Queen extends Figure {
 
             Position position = new Position(row, col);
             super.addPossiblePosition(position);
+            AttackedSquares.addAttackedSquares(position);
         }
     }
 }

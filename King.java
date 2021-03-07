@@ -27,6 +27,17 @@ public class King extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
+        
+        if (super.getColor().equals(FigureColor.BLACK)) {
+
+            BlackKingPositions.row = super.getRowPosition();
+            BlackKingPositions.col = super.getColPosition();
+        } else {
+
+            WhiteKingPositions.row = super.getRowPosition();
+            WhiteKingPositions.col = super.getColPosition();
+        }
+
         super.emptyMoves();
     }
 
