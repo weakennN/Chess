@@ -132,32 +132,12 @@ public class DefaultBoard implements IBoard {
 
         try {
 
-          /*  if (figures[row][col] instanceof Rook) {
-
-                validator.validateRookMoves(row, col, colToMove, rowToMove);
-            } else if (figures[row][col] instanceof Bishop) {
-
-                validator.validateBishopMoves(row, col, colToMove, rowToMove);
-            } else if (figures[row][col] instanceof Queen) {
-
-                validator.validateQueenMoves(row, col, colToMove, rowToMove);
-            }
-
-           */
-
             if (figures[rowToMove][colToMove] != null) {
 
                 if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
 
                     throw new IllegalArgumentException("Invalid move.");
                 }
-              /*  figures[row][col].attackSquare(rowToMove, colToMove);
-                figures[rowToMove][colToMove] = figures[row][col];
-                figures[row][col] = null;
-                drawBoard();
-                return;
-
-               */
             }
 
             if (figures[row][col] == null) {

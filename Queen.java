@@ -57,12 +57,6 @@ public class Queen extends Figure {
 
     }
 
-    @Override
-    public void attackSquare(int row, int col) {
-
-        this.move(row, col);
-    }
-
     private void possibleVerticalMoves(int incrementer, Figure[][] figures) {
 
         for (int i = super.getRowPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {

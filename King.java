@@ -84,12 +84,6 @@ public class King extends Figure {
 
     }
 
-    @Override
-    public void attackSquare(int row, int col) {
-
-        this.move(row, col);
-    }
-
     public void setInCheck(boolean inCheck) {
 
         this.isInCheck = inCheck;

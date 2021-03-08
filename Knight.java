@@ -61,9 +61,4 @@ public class Knight extends Figure {
         }
     }
 
-    @Override
-    public void attackSquare(int row, int col) {
-
-        this.move(row, col);
-    }
 }

@@ -62,7 +62,7 @@ public abstract class Figure {
         this.possiblePositions.getPositionList().clear();
     }
 
-    public abstract void attackSquare(int row, int col);
+
 
     public void setFigureColor(FigureColor figureColor) {
         this.figureColor = figureColor;
