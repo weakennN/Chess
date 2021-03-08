@@ -24,7 +24,7 @@ public class Main {
 
         figures.add(queen1);
 
-        for (int i = 0; i < 8; i++) {
+     /*   for (int i = 0; i < 8; i++) {
 
             Pawn pawn = new Pawn(1, i, FigureColor.BLACK);
             figures.add(pawn);
@@ -34,6 +34,8 @@ public class Main {
             Pawn pawn = new Pawn(6, i, FigureColor.WHITE);
             figures.add(pawn);
         }
+
+      */
 
         figures.add(rook);
         figures.add(rook3);
