@@ -27,7 +27,7 @@ public class Knight extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(), super.getColor());
         super.emptyMoves();
     }
 
@@ -57,7 +57,7 @@ public class Knight extends Figure {
 
         for (int i = 0; i < super.getPossiblePositions().size(); i++) {
 
-            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i));
+            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i), super.getColor());
         }
     }
 

@@ -41,6 +41,7 @@ public class King extends Figure {
             WhiteKingPositions.col = super.getColPosition();
         }
 
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
         super.emptyMoves();
     }
 
@@ -78,7 +79,7 @@ public class King extends Figure {
 
         for (int i = 0; i < super.getPossiblePositions().size(); i++) {
 
-            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i));
+            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i),super.getColor());
 
         }
 

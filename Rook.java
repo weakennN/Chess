@@ -29,7 +29,7 @@ public class Rook extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
         super.emptyMoves();
     }
 
@@ -53,13 +53,13 @@ public class Rook extends Figure {
         possibleHorizontalMoves(-1, figures);
 
     }
-    
+
     private void possibleVerticalMoves(int incrementer, Figure[][] figures) {
 
         for (int i = super.getRowPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(i, super.getColPosition());
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
             if (figures[i][super.getColPosition()] != null) {
 
                 break;
@@ -72,7 +72,7 @@ public class Rook extends Figure {
         for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
 
             if (figures[super.getRowPosition()][i] != null) {
 

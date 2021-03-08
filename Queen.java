@@ -27,7 +27,7 @@ public class Queen extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
         super.emptyMoves();
     }
 
@@ -62,7 +62,7 @@ public class Queen extends Figure {
         for (int i = super.getRowPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(i, super.getColPosition());
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
 
             if (figures[i][super.getColPosition()] != null) {
 
@@ -76,7 +76,7 @@ public class Queen extends Figure {
         for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
 
             if (figures[super.getRowPosition()][i] != null) {
 
@@ -91,7 +91,7 @@ public class Queen extends Figure {
 
             Position position = new Position(row, col);
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
 
             if (figures[row][col] != null) {
 

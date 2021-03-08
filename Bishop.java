@@ -29,7 +29,7 @@ public class Bishop extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
         super.emptyMoves();
     }
 
@@ -60,7 +60,7 @@ public class Bishop extends Figure {
 
             Position position = new Position(row, col);
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position);
+            AttackedSquares.addAttackedSquares(position,super.getColor());
 
             if (figures[row][col] != null) {
 

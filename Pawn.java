@@ -65,11 +65,15 @@ public class Pawn extends Figure {
 
             if (figures[super.getRowPosition() + 1][super.getColPosition() + 1] != null) {
 
-                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() + 1));
+                Position position = new Position(super.getRowPosition() + 1, super.getColPosition() + 1);
+                super.addPossiblePosition(position);
+                AttackedSquares.addAttackedSquares(position, super.getColor());
+
             }
             if (figures[super.getRowPosition() + 1][super.getColPosition() - 1] != null) {
-
-                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() - 1));
+                Position position = new Position(super.getRowPosition() + 1, super.getColPosition() - 1);
+                super.addPossiblePosition(position);
+                AttackedSquares.addAttackedSquares(position, super.getColor());
             }
         } else {
 
@@ -86,11 +90,15 @@ public class Pawn extends Figure {
 
             if (figures[super.getRowPosition() - 1][super.getColPosition() + 1] != null) {
 
-                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() + 1));
+                Position position = new Position(super.getRowPosition() - 1, super.getColPosition() + 1);
+                super.addPossiblePosition(position);
+                AttackedSquares.addAttackedSquares(position, super.getColor());
             }
             if (figures[super.getRowPosition() - 1][super.getColPosition() - 1] != null) {
 
-                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() - 1));
+                Position position = new Position(super.getRowPosition() - 1, super.getColPosition() - 1);
+                super.addPossiblePosition(position);
+                AttackedSquares.addAttackedSquares(position, super.getColor());
             }
         }
     }

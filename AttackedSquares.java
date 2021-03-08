@@ -5,21 +5,48 @@ import java.util.List;
 
 public class AttackedSquares {
 
-    private static List<Position> attackedSquares = new ArrayList<>();
+    private static List<Position> blackAttackedSquares = new ArrayList<>();
+    private static List<Position> whiteAttackedSquares = new ArrayList<>();
 
-    public static void addAttackedSquares(Position position) {
 
-        attackedSquares.add(position);
+    public static void addAttackedSquares(Position position, FigureColor color) {
+
+        if (color.equals(FigureColor.BLACK)) {
+            blackAttackedSquares.add(position);
+        } else {
+            whiteAttackedSquares.add(position);
+        }
     }
 
-    public static void removeAttackedSquares(List<Position> positions) {
+    public static void removeAttackedSquares(List<Position> positions, FigureColor color) {
 
-        for (int i = 0; i < positions.size(); i++) {
+        if (color.equals(FigureColor.BLACK)) {
+            for (int i = 0; i < positions.size(); i++) {
 
-            if (attackedSquares.contains(positions.get(i))) {
+                if (blackAttackedSquares.contains(positions.get(i))) {
 
-                attackedSquares.remove(positions.get(i));
+                    blackAttackedSquares.remove(positions.get(i));
+                }
+            }
+        } else {
+
+            for (int i = 0; i < positions.size(); i++) {
+
+                if (whiteAttackedSquares.contains(positions.get(i))) {
+
+                    whiteAttackedSquares.remove(positions.get(i));
+                }
             }
         }
+    }
+
+    public static List<Position> getBlackAttackedSquares() {
+
+        return blackAttackedSquares;
+    }
+
+    public static List<Position> getWhiteAttackedSquares() {
+
+        return whiteAttackedSquares;
     }
 }
