@@ -47,26 +47,50 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public void possibleMoves() {
+    public void possibleMoves(Figure[][] figures) {
 
         if (super.getColor().equals(FigureColor.BLACK)) {
 
             if (!this.firstMove) {
 
-                super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition()));
+                if (figures[super.getRowPosition() + 1][super.getColPosition()] == null) {
+                    super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition()));
+                }
                 super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
+
             } else {
                 super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
+
+            }
+
+            if (figures[super.getRowPosition() + 1][super.getColPosition() + 1] != null) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() + 1));
+            }
+            if (figures[super.getRowPosition() + 1][super.getColPosition() - 1] != null) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition() - 1));
             }
         } else {
 
             if (!this.firstMove) {
-
-                super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition()));
+                if (figures[super.getRowPosition() - 1][super.getColPosition()] == null) {
+                    super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition()));
+                }
                 super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
+
             } else {
 
                 super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
+            }
+
+            if (figures[super.getRowPosition() - 1][super.getColPosition() + 1] != null) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() + 1));
+            }
+            if (figures[super.getRowPosition() - 1][super.getColPosition() - 1] != null) {
+
+                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition() - 1));
             }
         }
     }

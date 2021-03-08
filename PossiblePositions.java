@@ -3,7 +3,7 @@ package Chess;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PossiblePosition {
+public class PossiblePositions {
 
     private List<Position> positionList;
 
@@ -11,7 +11,7 @@ public class PossiblePosition {
         return this.positionList;
     }
 
-    public PossiblePosition() {
+    public PossiblePositions() {
 
         this.positionList = new ArrayList<>();
     }

@@ -45,12 +45,12 @@ public class Bishop extends Figure {
     }
 
     @Override
-    public void possibleMoves() {
+    public void possibleMoves(Figure[][] figures) {
 
-        addPossibleDiagonalMoves(1, 1);
-        addPossibleDiagonalMoves(-1, 1);
-        addPossibleDiagonalMoves(-1, -1);
-        addPossibleDiagonalMoves(1, -1);
+        addPossibleDiagonalMoves(1, 1, figures);
+        addPossibleDiagonalMoves(-1, 1, figures);
+        addPossibleDiagonalMoves(-1, -1, figures);
+        addPossibleDiagonalMoves(1, -1, figures);
 
     }
 
@@ -60,13 +60,18 @@ public class Bishop extends Figure {
         this.move(row, col);
     }
 
-    private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer) {
+    private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer, Figure[][] figures) {
 
         for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
 
             Position position = new Position(row, col);
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position);
+
+            if (figures[row][col] != null) {
+
+                break;
+            }
         }
     }
 }

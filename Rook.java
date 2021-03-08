@@ -45,12 +45,12 @@ public class Rook extends Figure {
     }
 
     @Override
-    public void possibleMoves() {
+    public void possibleMoves(Figure[][] figures) {
 
-        possibleVerticalMoves(1);
-        possibleVerticalMoves(-1);
-        possibleHorizontalMoves(1);
-        possibleHorizontalMoves(-1);
+        possibleVerticalMoves(1, figures);
+        possibleVerticalMoves(-1, figures);
+        possibleHorizontalMoves(1, figures);
+        possibleHorizontalMoves(-1, figures);
 
     }
 
@@ -60,21 +60,30 @@ public class Rook extends Figure {
         this.move(row, col);
     }
 
-    private void possibleVerticalMoves(int incrementer) {
+    private void possibleVerticalMoves(int incrementer, Figure[][] figures) {
 
-        for (int i = super.getRowPosition(); i < 8 && i >= 0; i += incrementer) {
+        for (int i = super.getRowPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(i, super.getColPosition());
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position);
+            if (figures[i][super.getColPosition()] != null) {
+
+                break;
+            }
         }
     }
 
-    private void possibleHorizontalMoves(int incrementer) {
+    private void possibleHorizontalMoves(int incrementer, Figure[][] figures) {
 
-        for (int i = super.getColPosition(); i < 8 && i >= 0; i += incrementer) {
+        for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position);
+
+            if (figures[super.getRowPosition()][i] != null) {
+
+                break;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package Chess;
 
 public class King extends Figure {
 
+    private boolean isInCheck;
     static final String[] blackFigureDraw = {
             "█████████K  K██████████",
             "█████████K K███████████",
@@ -20,6 +21,8 @@ public class King extends Figure {
 
     public King(int rowPosition, int cowPosition, FigureColor figureColor) {
         super(rowPosition, cowPosition, figureColor);
+
+        this.isInCheck = false;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class King extends Figure {
 
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        
+
         if (super.getColor().equals(FigureColor.BLACK)) {
 
             BlackKingPositions.row = super.getRowPosition();
@@ -53,7 +56,7 @@ public class King extends Figure {
     }
 
     @Override
-    public void possibleMoves() {
+    public void possibleMoves(Figure[][] figures) {
 
         Position position = new Position(super.getRowPosition() + 1, super.getColPosition() + 1);
         Position position1 = new Position(super.getRowPosition() + 1, super.getColPosition() - 1);
@@ -73,11 +76,27 @@ public class King extends Figure {
         super.addPossiblePosition(position6);
         super.addPossiblePosition(position7);
 
+        for (int i = 0; i < super.getPossiblePositions().size(); i++) {
+
+            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i));
+
+        }
+
     }
 
     @Override
     public void attackSquare(int row, int col) {
 
         this.move(row, col);
+    }
+
+    public void setInCheck(boolean inCheck) {
+
+        this.isInCheck = inCheck;
+    }
+
+    public boolean getInCheck() {
+
+        return this.isInCheck;
     }
 }

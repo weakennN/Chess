@@ -105,9 +105,34 @@ public class DefaultBoard implements IBoard {
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
+       /* King king;
+        if (((King) figures[BlackKingPositions.row][BlackKingPositions.col]).getInCheck()) {
+
+            if (row != BlackKingPositions.row || col != BlackKingPositions.col) {
+
+                throw new IllegalArgumentException("You are in check you need to move your King");
+            }
+            king = (King) figures[BlackKingPositions.row][BlackKingPositions.col];
+            if (isCheckMate(king)) {
+
+            }
+        } else if (((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).getInCheck()) {
+
+            king = (King) figures[WhiteKingPositions.row][WhiteKingPositions.col];
+            if (row != WhiteKingPositions.row || col != WhiteKingPositions.col) {
+
+                throw new IllegalArgumentException("You are in check you need to move your King");
+            }
+            if (isCheckMate(king)) {
+
+            }
+        }
+
+        */
+
         try {
 
-            if (figures[row][col] instanceof Rook) {
+          /*  if (figures[row][col] instanceof Rook) {
 
                 validator.validateRookMoves(row, col, colToMove, rowToMove);
             } else if (figures[row][col] instanceof Bishop) {
@@ -118,6 +143,7 @@ public class DefaultBoard implements IBoard {
                 validator.validateQueenMoves(row, col, colToMove, rowToMove);
             }
 
+           */
 
             if (figures[rowToMove][colToMove] != null) {
 
@@ -125,12 +151,13 @@ public class DefaultBoard implements IBoard {
 
                     throw new IllegalArgumentException("Invalid move.");
                 }
-
-                figures[row][col].attackSquare(rowToMove, colToMove);
+              /*  figures[row][col].attackSquare(rowToMove, colToMove);
                 figures[rowToMove][colToMove] = figures[row][col];
                 figures[row][col] = null;
                 drawBoard();
                 return;
+
+               */
             }
 
             if (figures[row][col] == null) {
@@ -143,18 +170,20 @@ public class DefaultBoard implements IBoard {
 
             Position position = new Position(rowToMove, colToMove);
 
-            figures[row][col].possibleMoves();
+            figures[row][col].possibleMoves(figures);
             figures[row][col].isMoveValid(position);
             figures[row][col].move(rowToMove, colToMove);
             //TODO: Make possibleMoves(); execute it self in the move();
             //TODO: create a interface with only one method which is validateMove and make every figure to implemented (maybe).
             //TODO: the pawn can jump though another pawn.
-            //TODO: maybe remove the Validator class and and validateMove in Figure class and make so all the figures make its own.
+            //TODO: maybe remove the Validator class and validateMove in Figure class and make so all the figures make its own.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
 
             drawBoard();
-            if (isInCheck(figures[rowToMove][colToMove])) {
+            if (isInCheck(figures[rowToMove][colToMove], (King) figures[BlackKingPositions.row][BlackKingPositions.col],
+                    (King) figures[WhiteKingPositions.row][WhiteKingPositions.col])) {
+
 
                 System.out.println("it works");
             }
@@ -165,11 +194,11 @@ public class DefaultBoard implements IBoard {
         }
     }
 
-    private boolean isInCheck(Figure figure) {
+    private boolean isInCheck(Figure figure, King blackKing, King whiteKing) {
 
-        figure.possibleMoves();
+        figure.possibleMoves(figures);
         List<Position> currentFigurePossibleMoves = figure.getPossiblePositions();
-
+        figure.emptyMoves();
         if (figure.getColor().equals(FigureColor.WHITE)) {
 
             for (int i = 0; i < currentFigurePossibleMoves.size(); i++) {
@@ -191,6 +220,8 @@ public class DefaultBoard implements IBoard {
 
                         return false;
                     }
+
+                    blackKing.setInCheck(true);
                     return true;
                 }
             }
@@ -215,10 +246,18 @@ public class DefaultBoard implements IBoard {
 
                         return false;
                     }
+
+                    whiteKing.setInCheck(true);
                     return true;
                 }
             }
         }
+
+
+        return false;
+    }
+
+    private boolean isCheckMate(King king) {
 
 
         return false;

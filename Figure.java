@@ -8,14 +8,14 @@ public abstract class Figure {
     private int rowPosition;
     private int colPosition;
     private FigureColor figureColor;
-    private PossiblePosition possiblePosition;
+    private PossiblePositions possiblePositions;
 
     public Figure(int rowPosition, int cowPosition, FigureColor figureColor) {
 
         setRowPosition(rowPosition);
         setCowPosition(cowPosition);
         setFigureColor(figureColor);
-        this.possiblePosition = new PossiblePosition();
+        this.possiblePositions = new PossiblePositions();
     }
 
     public void setRowPosition(int rowPosition) {
@@ -44,10 +44,10 @@ public abstract class Figure {
 
     protected void addPossiblePosition(Position position) {
 
-        this.possiblePosition.addPosition(position);
+        this.possiblePositions.addPosition(position);
     }
 
-    public abstract void possibleMoves();
+    public abstract void possibleMoves(Figure[][] figures);
 
     protected void isMoveValid(Position position) {
 
@@ -59,7 +59,7 @@ public abstract class Figure {
 
     protected void emptyMoves() {
 
-        this.possiblePosition.getPositionList().clear();
+        this.possiblePositions.getPositionList().clear();
     }
 
     public abstract void attackSquare(int row, int col);
@@ -74,12 +74,12 @@ public abstract class Figure {
     }
 
     public List<Position> getPossiblePositions() {
-        return possiblePosition.getPositionList();
+        return possiblePositions.getPositionList();
     }
 
     public boolean validateMove(Position position) {
 
-        List<Position> positionList = this.possiblePosition.getPositionList();
+        List<Position> positionList = this.possiblePositions.getPositionList();
 
         for (int i = 0; i < positionList.size(); i++) {
 

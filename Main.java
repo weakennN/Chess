@@ -1,7 +1,6 @@
 package Chess;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,15 +13,15 @@ public class Main {
         players[0] = new Player(true, "Pesho");
         players[1] = new Player(false, "Pencho");
 
-      /*  Rook rook = new Rook(0, 0, FigureColor.BLACK);
+        Rook rook = new Rook(0, 0, FigureColor.BLACK);
         Rook rook2 = new Rook(7, 7, FigureColor.WHITE);
         Rook rook3 = new Rook(7, 0, FigureColor.WHITE);
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
         King king = new King(0, 4, FigureColor.BLACK);
         Queen queen = new Queen(0, 3, FigureColor.BLACK);
         Queen queen1 = new Queen(7, 3, FigureColor.WHITE);
-        King king1 = new King(7, 4, FigureColor.WHITE);
-        figures.add(king1);
+
+
         figures.add(queen1);
 
         for (int i = 0; i < 8; i++) {
@@ -35,7 +34,6 @@ public class Main {
             Pawn pawn = new Pawn(6, i, FigureColor.WHITE);
             figures.add(pawn);
         }
-
 
         figures.add(rook);
         figures.add(rook3);
@@ -51,6 +49,7 @@ public class Main {
         figures.add(knight3);
         figures.add(knight);
         figures.add(knight1);
+
         Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
         Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
         Bishop bishop2 = new Bishop(7, 2, FigureColor.WHITE);
@@ -60,18 +59,9 @@ public class Main {
         figures.add(bishop2);
         figures.add(bishop3);
 
-
-       */
-        Bishop bishop = new Bishop(0, 2, FigureColor.BLACK);
-        Bishop bishop1 = new Bishop(0, 5, FigureColor.BLACK);
-        Bishop bishop2 = new Bishop(7, 2, FigureColor.WHITE);
-        Bishop bishop3 = new Bishop(7, 5, FigureColor.WHITE);
-        figures.add(bishop);
-        figures.add(bishop1);
-        figures.add(bishop2);
-        figures.add(bishop3);
-        King king = new King(0, 4, FigureColor.BLACK);
+        King king1 = new King(7, 4, FigureColor.WHITE);
         figures.add(king);
+        figures.add(king1);
 
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
@@ -80,7 +70,7 @@ public class Main {
         defaultBoard.drawBoard();
 
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
 
             System.out.print("Type your move: ");
             String com = scan.nextLine();
