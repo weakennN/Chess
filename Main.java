@@ -36,7 +36,6 @@ public class Main {
         }
 
       */
-
         figures.add(rook);
         figures.add(rook3);
         figures.add(rook2);

@@ -105,38 +105,52 @@ public class DefaultBoard implements IBoard {
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
-        King king;
-        if (((King) figures[BlackKingPositions.row][BlackKingPositions.col]).getInCheck()) {
-
-            figures[rowToMove][colToMove] = figures[row][col];
-            figures[row][col] = null;
-            if (isMoveValidAfterCheck(figures, FigureColor.WHITE)) {
-
-                throw new IllegalArgumentException("Invalid move.");
-            } else {
-
-                figures[row][col] = figures[rowToMove][colToMove];
-                figures[rowToMove][colToMove] = null;
-                ((King) figures[BlackKingPositions.row][BlackKingPositions.col]).setInCheck(false);
-            }
-
-        } else if (((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).getInCheck()) {
-
-            figures[rowToMove][colToMove] = figures[row][col];
-            figures[row][col] = null;
-            if (isMoveValidAfterCheck(figures, FigureColor.BLACK)) {
-
-                throw new IllegalArgumentException("Invalid move.");
-            } else {
-
-                figures[row][col] = figures[rowToMove][colToMove];
-                figures[rowToMove][colToMove] = null;
-                ((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).setInCheck(false);
-            }
-        }
-
-
         try {
+            King king;
+            if (((King) figures[BlackKingPositions.row][BlackKingPositions.col]).getInCheck()) {
+
+                figures[row][col].move(rowToMove, colToMove);
+                figures[rowToMove][colToMove] = figures[row][col];
+                figures[row][col] = null;
+                if (isMoveValidAfterCheck(figures, FigureColor.WHITE)) {
+
+                    figures[row][col] = figures[rowToMove][colToMove];
+                    figures[rowToMove][colToMove] = null;
+                    throw new IllegalArgumentException("Invalid move.");
+                } else {
+
+               /* figures[row][col] = figures[rowToMove][colToMove];
+                figures[rowToMove][colToMove] = null;
+
+                */
+
+                  //  figures[rowToMove][colToMove] = figures[row][col];
+                   // figures[row][col] = null;
+                    ((King) figures[BlackKingPositions.row][BlackKingPositions.col]).setInCheck(false);
+                    drawBoard();
+                    return;
+                }
+
+            } else if (((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).getInCheck()) {
+
+
+                figures[row][col].move(rowToMove, colToMove);
+                figures[rowToMove][colToMove] = figures[row][col];
+                figures[row][col] = null;
+                if (isMoveValidAfterCheck(figures, FigureColor.BLACK)) {
+
+                    figures[row][col] = figures[rowToMove][colToMove];
+                    figures[rowToMove][colToMove] = null;
+                    throw new IllegalArgumentException("Invalid move.");
+                } else {
+
+
+                    ((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).setInCheck(false);
+                    drawBoard();
+                    return;
+                }
+            }
+
 
             if (figures[rowToMove][colToMove] != null) {
 
