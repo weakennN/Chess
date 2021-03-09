@@ -65,7 +65,6 @@ public class DefaultBoard implements IBoard {
                         result.append(figures[row][col].draw(i, color));
                     }
 
-
                 }
 
                 if (i == 2) {
@@ -114,6 +113,7 @@ public class DefaultBoard implements IBoard {
                 figures[row][col] = null;
                 if (isMoveValidAfterCheck(figures, FigureColor.WHITE)) {
 
+                    figures[rowToMove][colToMove].move(row,col);
                     figures[row][col] = figures[rowToMove][colToMove];
                     figures[rowToMove][colToMove] = null;
                     throw new IllegalArgumentException("Invalid move.");
@@ -139,6 +139,7 @@ public class DefaultBoard implements IBoard {
                 figures[row][col] = null;
                 if (isMoveValidAfterCheck(figures, FigureColor.BLACK)) {
 
+                    figures[rowToMove][colToMove].move(row,col);
                     figures[row][col] = figures[rowToMove][colToMove];
                     figures[rowToMove][colToMove] = null;
                     throw new IllegalArgumentException("Invalid move.");
@@ -176,6 +177,7 @@ public class DefaultBoard implements IBoard {
 
             //TODO: Make possibleMoves(); execute it self in the move();
             //TODO: create a interface with only one method which is validateMove and make every figure to implemented (maybe).
+            //TODO: Do more testing on the isMoveValidAfterCheck method and isInCheck method.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
 
