@@ -91,4 +91,9 @@ public abstract class Figure {
 
         return false;
     }
+
+    public void removeAttackedSquares(){
+
+        AttackedSquares.removeAttackedSquares(this.possiblePositions.getPositionList(),this.getColor());
+    }
 }

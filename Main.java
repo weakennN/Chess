@@ -70,7 +70,6 @@ public class Main {
         Game game = new Game(board, players, defaultBoard);
         defaultBoard.drawBoard();
 
-
         for (int i = 0; i < 100; i++) {
 
             System.out.print("Type your move: ");
