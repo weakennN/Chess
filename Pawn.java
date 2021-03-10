@@ -53,52 +53,60 @@ public class Pawn extends Figure {
 
             if (!this.firstMove) {
 
-                if (figures[super.getRowPosition() + 1][super.getColPosition()] == null) {
+                if (figures[super.getRowPosition() + 1][super.getColPosition()] == null && figures[super.getRowPosition() + 2][super.getColPosition()] == null) {
                     super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition()));
+                    super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
                 }
-                super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
+               // super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
 
-            } else {
+            } else if (figures[super.getRowPosition() + 1][super.getColPosition()] == null){
                 super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
 
             }
+            if (super.getColPosition() < 7) {
+                if (figures[super.getRowPosition() + 1][super.getColPosition() + 1] != null) {
 
-            if (figures[super.getRowPosition() + 1][super.getColPosition() + 1] != null) {
+                    Position position = new Position(super.getRowPosition() + 1, super.getColPosition() + 1);
+                    super.addPossiblePosition(position);
+                    AttackedSquares.addAttackedSquares(position, super.getColor());
 
-                Position position = new Position(super.getRowPosition() + 1, super.getColPosition() + 1);
-                super.addPossiblePosition(position);
-                AttackedSquares.addAttackedSquares(position, super.getColor());
-
+                }
             }
-            if (figures[super.getRowPosition() + 1][super.getColPosition() - 1] != null) {
-                Position position = new Position(super.getRowPosition() + 1, super.getColPosition() - 1);
-                super.addPossiblePosition(position);
-                AttackedSquares.addAttackedSquares(position, super.getColor());
+            if (super.getColPosition() > 0) {
+                if (figures[super.getRowPosition() + 1][super.getColPosition() - 1] != null) {
+                    Position position = new Position(super.getRowPosition() + 1, super.getColPosition() - 1);
+                    super.addPossiblePosition(position);
+                    AttackedSquares.addAttackedSquares(position, super.getColor());
+                }
             }
         } else {
 
             if (!this.firstMove) {
-                if (figures[super.getRowPosition() - 1][super.getColPosition()] == null) {
+                if (figures[super.getRowPosition() - 1][super.getColPosition()] == null && figures[super.getRowPosition() - 2][super.getColPosition()] == null) {
                     super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition()));
+                    super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
                 }
-                super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
+              //  super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
 
-            } else {
+            } else if (figures[super.getRowPosition() - 1][super.getColPosition()] == null){
 
                 super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
             }
+            if (super.getColPosition() < 7) {
+                if (figures[super.getRowPosition() - 1][super.getColPosition() + 1] != null) {
 
-            if (figures[super.getRowPosition() - 1][super.getColPosition() + 1] != null) {
-
-                Position position = new Position(super.getRowPosition() - 1, super.getColPosition() + 1);
-                super.addPossiblePosition(position);
-                AttackedSquares.addAttackedSquares(position, super.getColor());
+                    Position position = new Position(super.getRowPosition() - 1, super.getColPosition() + 1);
+                    super.addPossiblePosition(position);
+                    AttackedSquares.addAttackedSquares(position, super.getColor());
+                }
             }
-            if (figures[super.getRowPosition() - 1][super.getColPosition() - 1] != null) {
+            if (super.getColPosition() > 0) {
+                if (figures[super.getRowPosition() - 1][super.getColPosition() - 1] != null) {
 
-                Position position = new Position(super.getRowPosition() - 1, super.getColPosition() - 1);
-                super.addPossiblePosition(position);
-                AttackedSquares.addAttackedSquares(position, super.getColor());
+                    Position position = new Position(super.getRowPosition() - 1, super.getColPosition() - 1);
+                    super.addPossiblePosition(position);
+                    AttackedSquares.addAttackedSquares(position, super.getColor());
+                }
             }
         }
     }
