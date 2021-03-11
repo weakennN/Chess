@@ -108,18 +108,18 @@ public class DefaultBoard implements IBoard {
 
     public void moveFigure(int row, int col, int rowToMove, int colToMove) {
 
-        try {
+       // try {
             //Add all the possible positions of the checkFigure variable and add them to the possiblePositionsAfterCheck and then check if they are valid for the current figure the player want to move (or maybe first check if its valid and then add)
             King king;
             if (((King) figures[BlackKingPositions.row][BlackKingPositions.col]).getInCheck()) {
-                addPossiblePositionsAfterCheck();
-               // isCheckMate();
+
+                // isCheckMate();
                 /*figures[row][col].move(rowToMove, colToMove);
                 figures[rowToMove][colToMove] = figures[row][col];
                 figures[row][col] = null;
 
                  */
-                if (!isMoveValidAfterCheck(rowToMove,colToMove)) {
+                if (!isMoveValidAfterCheck(rowToMove, colToMove)) {
 
                    /* figures[rowToMove][colToMove].move(row, col);
                     figures[row][col] = figures[rowToMove][colToMove];
@@ -136,6 +136,9 @@ public class DefaultBoard implements IBoard {
 
                     //  figures[rowToMove][colToMove] = figures[row][col];
                     // figures[row][col] = null;
+                    figures[row][col].move(rowToMove, colToMove);
+                    figures[rowToMove][colToMove] = figures[row][col];
+                    figures[row][col] = null;
                     ((King) figures[BlackKingPositions.row][BlackKingPositions.col]).setInCheck(false);
                     drawBoard();
                     return;
@@ -148,7 +151,7 @@ public class DefaultBoard implements IBoard {
                 figures[row][col] = null;
 
                 */
-                if (!isMoveValidAfterCheck(rowToMove,colToMove)) {
+                if (!isMoveValidAfterCheck(rowToMove, colToMove)) {
 
                   /*  figures[rowToMove][colToMove].move(row, col);
                     figures[row][col] = figures[rowToMove][colToMove];
@@ -158,6 +161,9 @@ public class DefaultBoard implements IBoard {
                     throw new IllegalArgumentException("Invalid move.");
                 } else {
 
+                    figures[row][col].move(rowToMove, colToMove);
+                    figures[rowToMove][colToMove] = figures[row][col];
+                    figures[row][col] = null;
                     ((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).setInCheck(false);
                     drawBoard();
                     return;
@@ -196,15 +202,17 @@ public class DefaultBoard implements IBoard {
             drawBoard();
             addPossiblePositionsToAllFigures(figures);
             if (isInCheck()) {
-
+                addPossiblePositionsAfterCheck();
                 System.out.println("it works");
                 isCheckMate();
             }
 
-        } catch (Exception exceptionIgnored) {
+      /*  } catch (Exception exceptionIgnored) {
 
             System.out.println(exceptionIgnored.getMessage());
         }
+
+       */
     }
 
     private void addPossiblePositionsToAllFigures(Figure[][] figures) {
@@ -229,7 +237,7 @@ public class DefaultBoard implements IBoard {
 
     private void test(List<Position> positions, FigureColor figureColor, Figure figure) {
         King king;
-        if (figure instanceof King){
+        if (figure instanceof King) {
 
             return;
         }
@@ -253,7 +261,6 @@ public class DefaultBoard implements IBoard {
 
     private boolean isInCheck() {
 
-//Figure figure, King blackKing, King whiteKing
         List<Position> positions = AttackedSquares.getWhiteAttackedSquares();
 
         for (int i = 0; i < positions.size(); i++) {
@@ -280,44 +287,12 @@ public class DefaultBoard implements IBoard {
 
         return false;
     }
-//Figure[][] figures, FigureColor color
-    private boolean isMoveValidAfterCheck(int rowToMove,int colToMove) {
-      /*  Position position;
-        if (color.equals(FigureColor.WHITE)) {
 
-            position = new Position(BlackKingPositions.row, BlackKingPositions.col);
-        } else {
+    private boolean isMoveValidAfterCheck(int rowToMove, int colToMove) {
 
-            position = new Position(WhiteKingPositions.row, WhiteKingPositions.col);
-        }
+        for (int i = 0; i < this.possiblePositionsAfterCheck.size(); i++) {
 
-        for (int row = 0; row < boardHeight; row++) {
-
-            for (int col = 0; col < boardWidth; col++) {
-
-                if (figures[row][col] != null) {
-                    if (figures[row][col].getColor().equals(color)) {
-
-                        figures[row][col].emptyMoves();
-                        figures[row][col].possibleMoves(figures);
-
-                        try {
-
-                            figures[row][col].isMoveValid(position);
-                            return true;
-                        } catch (Exception exp) {
-
-                        }
-
-                    }
-                }
-            }
-
-        }
-*/
-        for (int i = 0;i < this.possiblePositionsAfterCheck.size();i++){
-
-            if (this.possiblePositionsAfterCheck.get(i).getRow() == rowToMove && this.possiblePositionsAfterCheck.get(i).getCol() == colToMove){
+            if (this.possiblePositionsAfterCheck.get(i).getRow() == rowToMove && this.possiblePositionsAfterCheck.get(i).getCol() == colToMove) {
                 return true;
             }
         }
@@ -328,7 +303,20 @@ public class DefaultBoard implements IBoard {
     }
 
     private boolean isCheckMate() {
-        List<Position> whiteAttackSquares = AttackedSquares.getWhiteAttackedSquares();
+
+        King king1 = (King) figures[BlackKingPositions.row][BlackKingPositions.col];
+        King king2 = (King) figures[WhiteKingPositions.row][WhiteKingPositions.col];
+        List<Position> attackedPositions;
+        if (king1.getInCheck()) {
+
+
+            attackedPositions = AttackedSquares.getWhiteAttackedSquares();
+        } else {
+
+            attackedPositions = AttackedSquares.getBlackAttackedSquares();
+        }
+
+        // List<Position> whiteAttackSquares = AttackedSquares.getWhiteAttackedSquares();
         for (int i = 0; i < this.possiblePositionsAfterCheck.size(); i++) {
 
             if (this.possiblePositionsAfterCheck.get(i).getRow() < 0 || this.possiblePositionsAfterCheck.get(i).getCol() < 0
@@ -342,9 +330,9 @@ public class DefaultBoard implements IBoard {
 
         for (int i = 0; i < this.possiblePositionsAfterCheck.size(); i++) {
 
-            for (int j = 0; j < whiteAttackSquares.size(); j++) {
+            for (int j = 0; j < attackedPositions.size(); j++) {
 
-                if (this.possiblePositionsAfterCheck.get(i).getRow() == whiteAttackSquares.get(j).getRow() && this.possiblePositionsAfterCheck.get(i).getCol() == whiteAttackSquares.get(j).getCol()) {
+                if (this.possiblePositionsAfterCheck.get(i).getRow() == attackedPositions.get(j).getRow() && this.possiblePositionsAfterCheck.get(i).getCol() == attackedPositions.get(j).getCol()) {
 
                     this.possiblePositionsAfterCheck.remove(this.possiblePositionsAfterCheck.get(i));
                     i -= 1;
@@ -352,17 +340,10 @@ public class DefaultBoard implements IBoard {
             }
         }
 
-        for (int i = 0; i < this.checkFigure.getPossiblePositions().size(); i++) {
-
-            for (int j = 0; j < whiteAttackSquares.size(); j++) {
-
-
-            }
-        }
-
         if (this.possiblePositionsAfterCheck.size() == 0) {
 
-            throw new IllegalArgumentException("check mate");
+            System.exit(0);
+            //throw new IllegalArgumentException("check mate");
         }
 
         return false;
@@ -394,15 +375,6 @@ public class DefaultBoard implements IBoard {
 
                     if (attackedPositions.get(j).getRow() == possiblePositions.get(i).getRow() && attackedPositions.get(j).getCol() == possiblePositions.get(i).getCol()) {
 
-                       /* try {
-                            king.isMoveValid(new Position(attackedPositions.get(j).getRow(), attackedPositions.get(j).getCol()));
-                            this.possiblePositionsAfterCheck.add(new Position(possiblePositions.get(i).getRow(), possiblePositions.get(i).getCol()));
-
-                        } catch (Exception ignored) {
-
-                        }
-
-                        */
                         flag = false;
                         break;
                     }
@@ -429,6 +401,10 @@ public class DefaultBoard implements IBoard {
                                 try {
                                     figures[row][col].isMoveValid(new Position(checkFigure.getPossiblePositions().get(i).getRow(), this.checkFigure.getPossiblePositions().get(i).getCol()));
                                 } catch (Exception ignored) {
+
+                                    continue;
+                                }
+                                if (figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()] != null){
 
                                     continue;
                                 }

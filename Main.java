@@ -65,8 +65,9 @@ public class Main {
         figures.add(king1);
 
      */
+
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
-        Queen queen = new Queen(0, 3, FigureColor.BLACK);
+        Queen queen = new Queen(3, 1, FigureColor.BLACK);
         King king1 = new King(7, 4, FigureColor.WHITE);
         King king = new King(0, 4, FigureColor.BLACK);
         figures.add(king);
