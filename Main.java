@@ -79,10 +79,15 @@ public class Main {
         Board board = new Board(figures);
         Game game = new Game(board, players, defaultBoard);
         defaultBoard.drawBoard();
-
+        String str = "";
         for (int i = 0; i < 100; i++) {
 
-            System.out.print("Type your move: ");
+            if (players[0].getTurn()){
+                str = "White's turn type your move: ";
+            }else {
+                str = "Black's turn type your move: ";
+            }
+            System.out.print(str);
             String com = scan.nextLine();
             String[] tokens = com.split("\\s+");
             int figureRow = Integer.parseInt(tokens[0]);
