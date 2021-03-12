@@ -65,7 +65,8 @@ public class Main {
         figures.add(king1);
 
      */
-
+        Bishop bishop = new Bishop(7,3,FigureColor.WHITE);
+        figures.add(bishop);
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
         Queen queen = new Queen(3, 1, FigureColor.BLACK);
         King king1 = new King(7, 4, FigureColor.WHITE);
@@ -82,11 +83,12 @@ public class Main {
         String str = "";
         for (int i = 0; i < 100; i++) {
 
-            if (players[0].getTurn()){
+            if (players[0].getTurn()) {
                 str = "White's turn type your move: ";
-            }else {
+            } else {
                 str = "Black's turn type your move: ";
             }
+
             System.out.print(str);
             String com = scan.nextLine();
             String[] tokens = com.split("\\s+");

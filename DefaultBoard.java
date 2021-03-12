@@ -169,14 +169,66 @@ public class DefaultBoard implements IBoard {
             //TODO: Do more testing on the isMoveValidAfterCheck method and isInCheck method.
             figures[rowToMove][colToMove] = figures[row][col];
             figures[row][col] = null;
+            // addPossiblePositionsToAllFigures(figures);
+         /*   if (isInCheck()){
+               King kingTest;
+                if (figures[rowToMove][colToMove].getColor().equals(FigureColor.WHITE)){
 
-            drawBoard();
+                    kingTest = (King) figures[WhiteKingPositions.row][WhiteKingPositions.col];
+                    if (kingTest.getInCheck()){
+                        this.figures[rowToMove][colToMove].move(row,col);
+                        figures[row][col] = figures[rowToMove][colToMove];
+                        figures[rowToMove][colToMove] = null;
+                        kingTest.setInCheck(false);
+                        throw new IllegalArgumentException("Invalid move");
+                    }
+                }else if(figures[rowToMove][colToMove].getColor().equals(FigureColor.BLACK)){
+
+                    kingTest = (King) figures[BlackKingPositions.row][BlackKingPositions.col];
+
+                    if (kingTest.getInCheck()){
+                        this.figures[rowToMove][colToMove].move(row,col);
+                        figures[row][col] = figures[row][col];
+                        figures[rowToMove][colToMove] = null;
+                        kingTest.setInCheck(false);
+                        throw new IllegalArgumentException("Invalid move");
+                    }
+                }
+            }
+
+          */
+            // drawBoard();
             addPossiblePositionsToAllFigures(figures);
             if (isInCheck()) {
+                King kingTest;
+                if (figures[rowToMove][colToMove].getColor().equals(FigureColor.WHITE)) {
+                    //needs more testing
+                    kingTest = (King) figures[WhiteKingPositions.row][WhiteKingPositions.col];
+                    if (kingTest.getInCheck()) {
+                        this.figures[rowToMove][colToMove].move(row, col);
+                        figures[row][col] = figures[rowToMove][colToMove];
+                        figures[rowToMove][colToMove] = null;
+                        kingTest.setInCheck(false);
+                        throw new IllegalArgumentException("Invalid move");
+                    }
+                } else if (figures[rowToMove][colToMove].getColor().equals(FigureColor.BLACK)) {
+
+                    kingTest = (King) figures[BlackKingPositions.row][BlackKingPositions.col];
+
+                    if (kingTest.getInCheck()) {
+                        this.figures[rowToMove][colToMove].move(row, col);
+                        figures[row][col] = figures[rowToMove][colToMove];
+                        figures[rowToMove][colToMove] = null;
+                        kingTest.setInCheck(false);
+                        throw new IllegalArgumentException("Invalid move");
+                    }
+                }
                 addPossiblePositionsAfterCheck();
                 System.out.println("it works");
                 isCheckMate();
             }
+
+            drawBoard();
 
         } catch (Exception exceptionIgnored) {
 
@@ -311,6 +363,7 @@ public class DefaultBoard implements IBoard {
         if (this.possiblePositionsAfterCheck.size() == 0) {
 
             System.out.println("check mate");
+            drawBoard();
             System.exit(0);
         }
 

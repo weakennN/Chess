@@ -56,7 +56,9 @@ public class Bishop extends Figure {
 
     private void addPossibleDiagonalMoves(int rowIncrementer, int colIncrementer, Figure[][] figures) {
 
-        for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer; col >= 0 && row < 8 && col < 8 && row >= 0; row += rowIncrementer, col += colIncrementer) {
+        for (int row = super.getRowPosition() + rowIncrementer, col = super.getColPosition() + colIncrementer;
+             col >= 0 && row < 8 && col < 8 && row >= 0;
+             row += rowIncrementer, col += colIncrementer) {
 
             Position position = new Position(row, col);
             super.addPossiblePosition(position);

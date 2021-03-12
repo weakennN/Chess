@@ -26,6 +26,7 @@ public class AttackedSquares {
                 if (blackAttackedSquares.contains(positions.get(i))) {
 
                     blackAttackedSquares.remove(positions.get(i));
+                    i -= 1;
                 }
             }
         } else {
@@ -35,6 +36,7 @@ public class AttackedSquares {
                 if (whiteAttackedSquares.contains(positions.get(i))) {
 
                     whiteAttackedSquares.remove(positions.get(i));
+                    i -= 1;
                 }
             }
         }
