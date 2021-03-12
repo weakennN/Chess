@@ -207,6 +207,7 @@ public class DefaultBoard implements IBoard {
                         figures[row][col] = figures[rowToMove][colToMove];
                         figures[rowToMove][colToMove] = null;
                         kingTest.setInCheck(false);
+                        this.figures[row][col].possibleMoves(figures);
                         throw new IllegalArgumentException("Invalid move");
                     }
                 } else if (figures[rowToMove][colToMove].getColor().equals(FigureColor.BLACK)) {
@@ -217,6 +218,7 @@ public class DefaultBoard implements IBoard {
                         this.figures[rowToMove][colToMove].move(row, col);
                         figures[row][col] = figures[rowToMove][colToMove];
                         figures[rowToMove][colToMove] = null;
+                        this.figures[row][col].possibleMoves(figures);
                         kingTest.setInCheck(false);
                         throw new IllegalArgumentException("Invalid move");
                     }
