@@ -3,6 +3,8 @@ package Chess;
 public class King extends Figure {
 
     private boolean isInCheck;
+    private boolean ableToCastle;
+
     static final String[] blackFigureDraw = {
             "█████████K  K██████████",
             "█████████K K███████████",
@@ -23,6 +25,7 @@ public class King extends Figure {
         super(rowPosition, cowPosition, figureColor);
 
         this.isInCheck = false;
+        setAbleToCastle(false);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class King extends Figure {
             WhiteKingPositions.col = super.getColPosition();
         }
 
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(), super.getColor());
         super.emptyMoves();
     }
 
@@ -79,7 +82,7 @@ public class King extends Figure {
 
         for (int i = 0; i < super.getPossiblePositions().size(); i++) {
 
-            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i),super.getColor());
+            AttackedSquares.addAttackedSquares(super.getPossiblePositions().get(i), super.getColor());
 
         }
 
@@ -94,4 +97,15 @@ public class King extends Figure {
 
         return this.isInCheck;
     }
+
+    private void setAbleToCastle(boolean ableToCastle) {
+
+        this.ableToCastle = ableToCastle;
+    }
+
+    public boolean getAbleToCastle() {
+
+        return this.ableToCastle;
+    }
+
 }

@@ -141,6 +141,8 @@ public class DefaultBoard implements IBoard {
                 }
             }
 
+            castle(row, col, rowToMove, colToMove);
+
             if (figures[rowToMove][colToMove] != null) {
 
                 if (figures[rowToMove][colToMove].getColor().equals(figures[row][col].getColor())) {
@@ -457,5 +459,116 @@ public class DefaultBoard implements IBoard {
         return this.figures;
     }
 
+    private void castle(int row, int col, int rowToMove, int colToMove) {
+
+//TODO: add more validations more methods so you dont copy paste
+        if (row != WhiteKingPositions.row && col != WhiteKingPositions.col
+                && row != BlackKingPositions.row && col != BlackKingPositions.col) {
+            return;
+        }
+
+        if (figures[row][col].getColor().equals(figures[rowToMove][colToMove].getColor())) {
+
+            if (figures[row][col] instanceof King || figures[row][col] instanceof Rook &&
+                    figures[rowToMove][colToMove] instanceof King ||
+                    figures[rowToMove][colToMove] instanceof Rook) {
+
+                King king;
+                Rook rook;
+
+                if (figures[row][col].getColor().equals(FigureColor.BLACK)) {
+
+                    if (row == BlackKingPositions.row && col == BlackKingPositions.col) {
+
+                        king = (King) figures[row][col];
+                        rook = (Rook) figures[rowToMove][colToMove];
+                    } else {
+
+                        king = (King) figures[rowToMove][colToMove];
+                        rook = (Rook) figures[row][col];
+                    }
+
+                    if (rook.getColPosition() > 0) {
+
+                        if (!validateCastle(row, col, rowToMove, colToMove, 1, king.getRowPosition(), king.getColPosition())) {
+
+                            throw new IllegalArgumentException("Invalid move");
+                        } else {
+
+                            swapFiguresForCastle(2, -1, king, rook);
+                            drawBoard();
+                        }
+                    } else {
+
+                        if (!validateCastle(row, col, rowToMove, colToMove, -1, king.getRowPosition(), king.getColPosition())) {
+
+                            throw new IllegalArgumentException("Invalid move");
+                        } else {
+
+                            swapFiguresForCastle(-2, 1, king, rook);
+                            drawBoard();
+                        }
+                    }
+
+                } else if (figures[row][col].getColor().equals(FigureColor.WHITE)) {
+
+                    if (row == WhiteKingPositions.row && col == WhiteKingPositions.col) {
+
+                        king = (King) figures[row][col];
+                        rook = (Rook) figures[rowToMove][colToMove];
+                    } else {
+
+                        king = (King) figures[rowToMove][colToMove];
+                        rook = (Rook) figures[row][col];
+                    }
+
+                    if (rook.getColPosition() > 0) {
+
+                        if (!validateCastle(row, col, rowToMove, colToMove, 1, king.getRowPosition(), king.getColPosition())) {
+
+                            throw new IllegalArgumentException("Invalid move");
+                        } else {
+
+                            swapFiguresForCastle(2, -1, king, rook);
+                            drawBoard();
+                        }
+                    } else {
+
+                        if (!validateCastle(row, col, rowToMove, colToMove, -1, king.getRowPosition(), king.getColPosition())) {
+
+                            throw new IllegalArgumentException("Invalid move");
+                        } else {
+
+                            swapFiguresForCastle(-2, 1, king, rook);
+                            drawBoard();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean validateCastle(int row, int col, int rowToMove, int colToMove, int incrementer, int kingRow, int kingCol) {
+
+        for (int i = kingCol + incrementer; i >= 1 && i < 7; i += incrementer) {
+
+            if (figures[kingRow][i] != null) {
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void swapFiguresForCastle(int kingColIncrementer, int rookColIncrementer, King king, Rook rook) {
+
+        figures[king.getRowPosition()][king.getColPosition() + kingColIncrementer] = figures[king.getRowPosition()][king.getColPosition()];
+        figures[king.getRowPosition()][king.getColPosition()] = null;
+        king.move(king.getRowPosition(), king.getColPosition() + kingColIncrementer);
+        figures[rook.getRowPosition()][king.getColPosition() + rookColIncrementer] = figures[rook.getRowPosition()][rook.getColPosition()];
+        figures[rook.getRowPosition()][rook.getColPosition()] = null;
+        rook.move(rook.getRowPosition(), king.getColPosition() + rookColIncrementer);
+    }
 
 }
