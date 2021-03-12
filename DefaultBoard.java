@@ -8,14 +8,12 @@ public class DefaultBoard implements IBoard {
     final int boardWidth = 8;
     final int boardHeight = 8;
     private Figure[][] figures;
-    private Validator validator;
     private List<Position> possiblePositionsAfterCheck;
     private Figure checkFigure;
 
     public DefaultBoard() {
 
         this.figures = new Figure[boardHeight][boardWidth];
-        this.validator = new Validator(figures);
         this.possiblePositionsAfterCheck = new ArrayList<>();
     }
 
