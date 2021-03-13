@@ -2,6 +2,8 @@ package Chess;
 
 public class Rook extends Figure {
 
+    private boolean isAbleToCastle;
+
     static final String[] blackFigureDraw = {
             "█████████RRRRRR████████",
             "█████████R    R████████",
@@ -21,15 +23,16 @@ public class Rook extends Figure {
     public Rook(int rowPosition, int cowPosition, FigureColor figureColor) {
         super(rowPosition, cowPosition, figureColor);
 
+        setAbleToCastle(true);
     }
 
     @Override
     public void move(int rowPosition, int cowPosition) {
 
-
+        setAbleToCastle(false);
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
-        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(),super.getColor());
+        AttackedSquares.removeAttackedSquares(super.getPossiblePositions(), super.getColor());
         super.emptyMoves();
     }
 
@@ -59,7 +62,7 @@ public class Rook extends Figure {
         for (int i = super.getRowPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(i, super.getColPosition());
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position,super.getColor());
+            AttackedSquares.addAttackedSquares(position, super.getColor());
             if (figures[i][super.getColPosition()] != null) {
 
                 break;
@@ -72,13 +75,23 @@ public class Rook extends Figure {
         for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
             super.addPossiblePosition(position);
-            AttackedSquares.addAttackedSquares(position,super.getColor());
+            AttackedSquares.addAttackedSquares(position, super.getColor());
 
             if (figures[super.getRowPosition()][i] != null) {
 
                 break;
             }
         }
+    }
+
+    private void setAbleToCastle(boolean isAbleToCastle) {
+
+        this.isAbleToCastle = isAbleToCastle;
+    }
+
+    public boolean getIsAbleToCastle() {
+
+        return this.isAbleToCastle;
     }
 
 }

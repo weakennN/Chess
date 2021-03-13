@@ -25,12 +25,13 @@ public class King extends Figure {
         super(rowPosition, cowPosition, figureColor);
 
         this.isInCheck = false;
-        setAbleToCastle(false);
+        setAbleToCastle(true);
     }
 
     @Override
     public void move(int rowPosition, int cowPosition) {
 
+        setAbleToCastle(false);
         super.setRowPosition(rowPosition);
         super.setCowPosition(cowPosition);
 

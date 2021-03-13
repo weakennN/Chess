@@ -72,24 +72,15 @@ public class Queen extends Figure {
     }
 
     private void possibleHorizontalMoves(int incrementer, Figure[][] figures) {
-        boolean flag = false;
+
         for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
-
-            if (flag){
-
-                AttackedSquares.addAttackedSquares(position, super.getColor());
-            }
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
 
-            if (figures[super.getRowPosition()][i] != null && !(figures[super.getRowPosition()][i] instanceof King)) {
-
+            if (figures[super.getRowPosition()][i] != null) {
 
                 break;
-            }else if(figures[super.getRowPosition()][i] instanceof King){
-
-                flag = true;
             }
         }
     }

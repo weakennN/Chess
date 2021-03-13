@@ -115,7 +115,7 @@ public class DefaultBoard implements IBoard {
 
                     throw new IllegalArgumentException("Invalid move.");
                 } else {
-
+//TODO: maybe add isMoveValid method here so its safe that when a block the check it actually moves correct
                     figures[row][col].move(rowToMove, colToMove);
                     figures[rowToMove][colToMove] = figures[row][col];
                     figures[row][col] = null;
@@ -141,7 +141,16 @@ public class DefaultBoard implements IBoard {
                 }
             }
 
-            castle(row, col, rowToMove, colToMove);
+            if (figures[row][col] == null) {
+
+                throw new IllegalArgumentException("Theres no figure at this square.");
+            }
+
+            if (castle(row, col, rowToMove, colToMove)) {
+
+                drawBoard();
+                return;
+            }
 
             if (figures[rowToMove][colToMove] != null) {
 
@@ -151,10 +160,7 @@ public class DefaultBoard implements IBoard {
                 }
             }
 
-            if (figures[row][col] == null) {
-
-                throw new IllegalArgumentException("Theres no figure at this square.");
-            } else if (rowToMove >= 8 || colToMove >= 8) {
+            if (rowToMove >= 8 || colToMove >= 8) {
 
                 throw new IllegalArgumentException("Invalid move");
             }
@@ -236,7 +242,6 @@ public class DefaultBoard implements IBoard {
 
             System.out.println(exceptionIgnored.getMessage());
         }
-
 
     }
 
@@ -326,16 +331,18 @@ public class DefaultBoard implements IBoard {
     }
 
     private boolean isCheckMate() {
-
+        //debug this
         King king1 = (King) figures[BlackKingPositions.row][BlackKingPositions.col];
         King king2 = (King) figures[WhiteKingPositions.row][WhiteKingPositions.col];
+        King king;
         List<Position> attackedPositions;
         if (king1.getInCheck()) {
 
-
+            king = king1;
             attackedPositions = AttackedSquares.getWhiteAttackedSquares();
         } else {
 
+            king = king2;
             attackedPositions = AttackedSquares.getBlackAttackedSquares();
         }
 
@@ -350,7 +357,20 @@ public class DefaultBoard implements IBoard {
 
         }
 
-        for (int i = 0; i < this.possiblePositionsAfterCheck.size(); i++) {
+     /*   for (int i = 0;i < king.getPossiblePositions().size();i++){
+
+            for (int j = 0;j < attackedPositions.size();j++){
+
+                if (attackedPositions.get(j).getRow() == king.getPossiblePositions().get(i).getRow() &&
+                attackedPositions.get(j).getCol() == king.getPossiblePositions().get(i).getCol()){
+
+
+                }
+            }
+        }
+
+      */
+       /* for (int i = 0; i < this.possiblePositionsAfterCheck.size(); i++) {
 
             for (int j = 0; j < attackedPositions.size(); j++) {
 
@@ -361,6 +381,8 @@ public class DefaultBoard implements IBoard {
                 }
             }
         }
+
+        */
 
         if (this.possiblePositionsAfterCheck.size() == 0) {
 
@@ -411,8 +433,13 @@ public class DefaultBoard implements IBoard {
                     flag = true;
                 }
             }
-
+            List<Position> positions = new ArrayList<>();
             for (int i = 0; i < this.checkFigure.getPossiblePositions().size(); i++) {
+
+                positions.add(this.checkFigure.getPossiblePositions().get(i));
+            }
+
+            for (int i = 0; i < positions.size(); i++) {
 
 
                 for (int row = 0; row < boardHeight; row++) {
@@ -422,27 +449,50 @@ public class DefaultBoard implements IBoard {
                         if (figures[row][col] != null) {
                             if (figures[row][col].getColor().equals(king.getColor())) {
                                 try {
-                                    figures[row][col].isMoveValid(new Position(checkFigure.getPossiblePositions().get(i).getRow(), this.checkFigure.getPossiblePositions().get(i).getCol()));
+                                    figures[row][col].isMoveValid(new Position(positions.get(i).getRow(), positions.get(i).getCol()));
                                 } catch (Exception ignored) {
 
                                     continue;
                                 }
-                                if (figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()] != null) {
+                                if (figures[row][col] instanceof King) {
+                                    continue;
+                                } else if (row == this.checkFigure.getRowPosition() && col == this.checkFigure.getColPosition()) {
+                                    continue;
+                                } else if (positions.get(i).getRow() == king.getRowPosition() && positions.get(i).getCol() == king.getColPosition()) {
+
+                                    continue;
+                                } else if (figures[positions.get(i).getRow()][positions.get(i).getCol()] != null && figures[positions.get(i).getRow()][positions.get(i).getCol()].getColor().equals(king.getColor())) {
 
                                     continue;
                                 }
-                                this.figures[row][col].move(checkFigure.getPossiblePositions().get(i).getRow(), this.checkFigure.getPossiblePositions().get(i).getCol());
-                                figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()] = figures[row][col];
-                                figures[row][col] = null;
-                                if (isInCheck()) {
+                               /* if (figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()] != null) {
 
-                                } else {
-                                    this.possiblePositionsAfterCheck.add((new Position(checkFigure.getPossiblePositions().get(i).getRow(), this.checkFigure.getPossiblePositions().get(i).getCol())));
+                                    continue;
                                 }
-                                figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()].move(row, col);
-                                figures[row][col] = figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()];
-                                figures[checkFigure.getPossiblePositions().get(i).getRow()][this.checkFigure.getPossiblePositions().get(i).getCol()] = null;
 
+                                */
+                                try {
+                                    int positionRow = positions.get(i).getRow();
+                                    int positionCol = positions.get(i).getCol();
+                                    this.figures[row][col].move(positions.get(i).getRow(), positions.get(i).getCol());
+                                    figures[positions.get(i).getRow()][positions.get(i).getCol()] = figures[row][col];
+                                    figures[row][col] = null;
+                                    AttackedSquares.removeAttackedSquares(this.checkFigure.getPossiblePositions(), this.checkFigure.getColor());
+                                    this.checkFigure.emptyMoves();
+                                    this.checkFigure.possibleMoves(figures);
+                                    if (isInCheck()) {
+
+                                    } else {
+                                        this.possiblePositionsAfterCheck.add((new Position(positions.get(i).getRow(), positions.get(i).getCol())));
+                                    }
+                                    figures[positionRow][positionCol].move(row, col);
+                                    figures[row][col] = figures[positionRow][positionCol];
+                                    figures[positionRow][positionCol] = null;
+                                    this.figures[row][col].possibleMoves(figures);
+                                } catch (Exception exception) {
+
+                                    System.out.println(exception.getMessage());
+                                }
                             }
                         }
                     }
@@ -459,12 +509,13 @@ public class DefaultBoard implements IBoard {
         return this.figures;
     }
 
-    private void castle(int row, int col, int rowToMove, int colToMove) {
+    private boolean castle(int row, int col, int rowToMove, int colToMove) {
 
 //TODO: add more validations more methods so you dont copy paste
-        if (row != WhiteKingPositions.row && col != WhiteKingPositions.col
-                && row != BlackKingPositions.row && col != BlackKingPositions.col) {
-            return;
+
+        if (figures[rowToMove][colToMove] == null) {
+
+            return false;
         }
 
         if (figures[row][col].getColor().equals(figures[rowToMove][colToMove].getColor())) {
@@ -473,79 +524,24 @@ public class DefaultBoard implements IBoard {
                     figures[rowToMove][colToMove] instanceof King ||
                     figures[rowToMove][colToMove] instanceof Rook) {
 
-                King king;
-                Rook rook;
-
                 if (figures[row][col].getColor().equals(FigureColor.BLACK)) {
 
-                    if (row == BlackKingPositions.row && col == BlackKingPositions.col) {
+                    if (smt(row, col, rowToMove, colToMove, BlackKingPositions.row, BlackKingPositions.col)) {
 
-                        king = (King) figures[row][col];
-                        rook = (Rook) figures[rowToMove][colToMove];
-                    } else {
-
-                        king = (King) figures[rowToMove][colToMove];
-                        rook = (Rook) figures[row][col];
-                    }
-
-                    if (rook.getColPosition() > 0) {
-
-                        if (!validateCastle(row, col, rowToMove, colToMove, 1, king.getRowPosition(), king.getColPosition())) {
-
-                            throw new IllegalArgumentException("Invalid move");
-                        } else {
-
-                            swapFiguresForCastle(2, -1, king, rook);
-                            drawBoard();
-                        }
-                    } else {
-
-                        if (!validateCastle(row, col, rowToMove, colToMove, -1, king.getRowPosition(), king.getColPosition())) {
-
-                            throw new IllegalArgumentException("Invalid move");
-                        } else {
-
-                            swapFiguresForCastle(-2, 1, king, rook);
-                            drawBoard();
-                        }
+                        return true;
                     }
 
                 } else if (figures[row][col].getColor().equals(FigureColor.WHITE)) {
 
-                    if (row == WhiteKingPositions.row && col == WhiteKingPositions.col) {
+                    if (smt(row, col, rowToMove, colToMove, WhiteKingPositions.row, WhiteKingPositions.col)) {
 
-                        king = (King) figures[row][col];
-                        rook = (Rook) figures[rowToMove][colToMove];
-                    } else {
-
-                        king = (King) figures[rowToMove][colToMove];
-                        rook = (Rook) figures[row][col];
-                    }
-
-                    if (rook.getColPosition() > 0) {
-
-                        if (!validateCastle(row, col, rowToMove, colToMove, 1, king.getRowPosition(), king.getColPosition())) {
-
-                            throw new IllegalArgumentException("Invalid move");
-                        } else {
-
-                            swapFiguresForCastle(2, -1, king, rook);
-                            drawBoard();
-                        }
-                    } else {
-
-                        if (!validateCastle(row, col, rowToMove, colToMove, -1, king.getRowPosition(), king.getColPosition())) {
-
-                            throw new IllegalArgumentException("Invalid move");
-                        } else {
-
-                            swapFiguresForCastle(-2, 1, king, rook);
-                            drawBoard();
-                        }
+                        return true;
                     }
                 }
             }
         }
+
+        return false;
     }
 
     public boolean validateCastle(int row, int col, int rowToMove, int colToMove, int incrementer, int kingRow, int kingCol) {
@@ -571,4 +567,46 @@ public class DefaultBoard implements IBoard {
         rook.move(rook.getRowPosition(), king.getColPosition() + rookColIncrementer);
     }
 
+    private boolean smt(int row, int col, int rowToMove, int colToMove, int kingRow, int kingCol) {
+
+        King king;
+        Rook rook;
+
+        if (row == kingRow && col == kingCol) {
+
+            king = (King) figures[row][col];
+            rook = (Rook) figures[rowToMove][colToMove];
+        } else {
+
+            king = (King) figures[rowToMove][colToMove];
+            rook = (Rook) figures[row][col];
+        }
+
+        if (!king.getAbleToCastle() || !rook.getIsAbleToCastle()) {
+
+            throw new IllegalArgumentException("Invalid move");
+        }
+
+        if (rook.getColPosition() > 0) {
+
+            if (!validateCastle(row, col, rowToMove, colToMove, 1, king.getRowPosition(), king.getColPosition())) {
+
+                throw new IllegalArgumentException("Invalid move");
+            } else {
+
+                swapFiguresForCastle(2, -1, king, rook);
+            }
+        } else {
+
+            if (!validateCastle(row, col, rowToMove, colToMove, -1, king.getRowPosition(), king.getColPosition())) {
+
+                throw new IllegalArgumentException("Invalid move");
+            } else {
+
+                swapFiguresForCastle(-2, 1, king, rook);
+            }
+        }
+
+        return true;
+    }
 }
