@@ -75,10 +75,11 @@ public class Queen extends Figure {
 
         for (int i = super.getColPosition() + incrementer; i < 8 && i >= 0; i += incrementer) {
             Position position = new Position(super.getRowPosition(), i);
+
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
 
-            if (figures[super.getRowPosition()][i] != null) {
+            if (figures[super.getRowPosition()][i] != null && !(figures[super.getRowPosition()][i] instanceof King)) {
 
                 break;
             }
