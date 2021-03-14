@@ -5,6 +5,7 @@ public class Game {
     private Board board;
     private Player[] players;
     private DefaultBoard defaultBoard;
+    public static boolean GameOver = false;
 
     public Game(Board board, Player[] players, DefaultBoard defaultBoard) {
 
@@ -37,4 +38,6 @@ public class Game {
 
         defaultBoard.moveFigure(figureRow, figureCol, rowToMove, colToMove);
     }
+
+
 }

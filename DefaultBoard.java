@@ -108,6 +108,8 @@ public class DefaultBoard implements IBoard {
         //TODO: Maybe in the possibleMoves method add so that you dont have possible move on a figure thats your color
 
         try {
+
+
             //Add all the possible positions of the checkFigure variable and add them to the possiblePositionsAfterCheck and then check if they are valid for the current figure the player want to move (or maybe first check if its valid and then add)
             King king;
             if (((King) figures[BlackKingPositions.row][BlackKingPositions.col]).getInCheck()) {
@@ -117,6 +119,7 @@ public class DefaultBoard implements IBoard {
                     throw new IllegalArgumentException("Invalid move.");
                 } else {
 //TODO: maybe add isMoveValid method here so its safe that when a block the check it actually moves correct
+                    figures[row][col].isMoveValid(new Position(rowToMove, colToMove));
                     removeAttackedMoves(rowToMove, colToMove);
                     figures[row][col].move(rowToMove, colToMove);
                     figures[rowToMove][colToMove] = figures[row][col];
@@ -133,6 +136,7 @@ public class DefaultBoard implements IBoard {
 
                     throw new IllegalArgumentException("Invalid move.");
                 } else {
+                    figures[row][col].isMoveValid(new Position(rowToMove, colToMove));
                     removeAttackedMoves(rowToMove, colToMove);
                     figures[row][col].move(rowToMove, colToMove);
                     figures[rowToMove][colToMove] = figures[row][col];
@@ -392,7 +396,7 @@ public class DefaultBoard implements IBoard {
 
             System.out.println("check mate");
             drawBoard();
-            System.exit(0);
+            Game.GameOver = true;
         }
 
         return false;
