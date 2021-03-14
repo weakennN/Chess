@@ -63,7 +63,7 @@ public class Rook extends Figure {
             Position position = new Position(i, super.getColPosition());
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
-            if (figures[i][super.getColPosition()] != null) {
+            if (figures[i][super.getColPosition()] != null && !(figures[i][super.getColPosition()] instanceof King)) {
 
                 break;
             }
@@ -77,7 +77,7 @@ public class Rook extends Figure {
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
 
-            if (figures[super.getRowPosition()][i] != null) {
+            if (figures[super.getRowPosition()][i] != null && !(figures[super.getRowPosition()][i] instanceof King)) {
 
                 break;
             }

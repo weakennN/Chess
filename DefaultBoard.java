@@ -256,7 +256,7 @@ public class DefaultBoard implements IBoard {
 
                 if (figures[row][col] != null) {
 
-                    if (figures[row][col].getPossiblePositions().size() > 1) {
+                    if (figures[row][col].getPossiblePositions().size() > 0) {
 
                         figures[row][col].removeAttackedSquares();
                         figures[row][col].emptyMoves();

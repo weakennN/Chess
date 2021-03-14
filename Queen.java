@@ -64,7 +64,7 @@ public class Queen extends Figure {
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
 
-            if (figures[i][super.getColPosition()] != null) {
+            if (figures[i][super.getColPosition()] != null && !(figures[i][super.getColPosition()] instanceof King)) {
 
                 break;
             }
@@ -94,7 +94,7 @@ public class Queen extends Figure {
             super.addPossiblePosition(position);
             AttackedSquares.addAttackedSquares(position, super.getColor());
 
-            if (figures[row][col] != null) {
+            if (figures[row][col] != null && !(figures[row][col] instanceof King)) {
 
                 break;
             }
