@@ -126,6 +126,7 @@ public class DefaultBoard implements IBoard {
                     figures[row][col] = null;
                     ((King) figures[BlackKingPositions.row][BlackKingPositions.col]).setInCheck(false);
                     drawBoard();
+                    this.possiblePositionsAfterCheck.clear();
                     return;
                 }
 
@@ -142,6 +143,7 @@ public class DefaultBoard implements IBoard {
                     figures[rowToMove][colToMove] = figures[row][col];
                     figures[row][col] = null;
                     ((King) figures[WhiteKingPositions.row][WhiteKingPositions.col]).setInCheck(false);
+                    this.possiblePositionsAfterCheck.clear();
                     drawBoard();
                     return;
                 }
@@ -463,6 +465,9 @@ public class DefaultBoard implements IBoard {
 
                                         try {
                                             //TODO: Do more testing on this try catch
+                                            if (figures[row][col] instanceof King) {
+                                                continue;
+                                            }
                                             figures[row][col].isMoveValid(new Position(this.checkFigure.getRowPosition(), this.checkFigure.getColPosition()));
                                             this.possiblePositionsAfterCheck.add(new Position(this.checkFigure.getRowPosition(), this.checkFigure.getColPosition()));
                                             continue;

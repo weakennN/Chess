@@ -61,15 +61,16 @@ public class Main {
         figures.add(bishop3);
 
         */
-        King king = new King(0, 4, FigureColor.BLACK);
-        King king1 = new King(7, 4, FigureColor.WHITE);
-        Queen queen = new Queen(0, 3, FigureColor.BLACK);
-        Rook rook = new Rook(0, 0, FigureColor.BLACK);
 
+        King king = new King(0, 4, FigureColor.BLACK);
+        King king1 = new King(7,4,FigureColor.WHITE);
+        Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
+        Queen queen = new Queen(0, 3, FigureColor.BLACK);
+        figures.add(rook1);
+        figures.add(queen);
         figures.add(king);
         figures.add(king1);
-        figures.add(queen);
-        figures.add(rook);
+
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
