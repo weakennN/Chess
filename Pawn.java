@@ -57,7 +57,6 @@ public class Pawn extends Figure {
                     super.addPossiblePosition(new Position(super.getRowPosition() + 2, super.getColPosition()));
                     super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
                 }
-               // super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
 
             } else if (figures[super.getRowPosition() + 1][super.getColPosition()] == null){
                 super.addPossiblePosition(new Position(super.getRowPosition() + 1, super.getColPosition()));
@@ -86,7 +85,6 @@ public class Pawn extends Figure {
                     super.addPossiblePosition(new Position(super.getRowPosition() - 2, super.getColPosition()));
                     super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
                 }
-              //  super.addPossiblePosition(new Position(super.getRowPosition() - 1, super.getColPosition()));
 
             } else if (figures[super.getRowPosition() - 1][super.getColPosition()] == null){
 

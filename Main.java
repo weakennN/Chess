@@ -12,15 +12,15 @@ public class Main {
         Player[] players = new Player[2];
         players[0] = new Player(true, "Pesho");
         players[1] = new Player(false, "Pencho");
-       /* Rook rook = new Rook(0, 0, FigureColor.BLACK);
+
+        Rook rook = new Rook(0, 0, FigureColor.BLACK);
         Rook rook2 = new Rook(7, 7, FigureColor.WHITE);
         Rook rook3 = new Rook(7, 0, FigureColor.WHITE);
         Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
         King king = new King(0, 4, FigureColor.BLACK);
-        King king1 = new King(7,4,FigureColor.WHITE);
+        King king1 = new King(7, 4, FigureColor.WHITE);
         Queen queen = new Queen(0, 3, FigureColor.BLACK);
         Queen queen1 = new Queen(7, 3, FigureColor.WHITE);
-
 
         figures.add(queen1);
         figures.add(king1);
@@ -60,17 +60,6 @@ public class Main {
         figures.add(bishop2);
         figures.add(bishop3);
 
-        */
-
-        King king = new King(0, 4, FigureColor.BLACK);
-        King king1 = new King(7,4,FigureColor.WHITE);
-        Rook rook1 = new Rook(0, 7, FigureColor.BLACK);
-        Queen queen = new Queen(0, 3, FigureColor.BLACK);
-        figures.add(rook1);
-        figures.add(queen);
-        figures.add(king);
-        figures.add(king1);
-
         DefaultBoard defaultBoard = new DefaultBoard();
         defaultBoard.settFiguresPositions(figures);
         Board board = new Board(figures);
@@ -105,12 +94,12 @@ public class Main {
             game.play(figureRow - 1, figureCol - 1, rowToMove - 1, colToMove - 1);
         }
         str = "";
-        if (players[0].getTurn()){
-
-            str = "White wins";
-        }else {
+        if (players[0].getTurn()) {
 
             str = "Black wins";
+        } else {
+
+            str = "White wins";
         }
 
         System.out.println(str);

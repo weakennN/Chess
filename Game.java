@@ -15,28 +15,46 @@ public class Game {
     }
 
     public void play(int figureRow, int figureCol, int rowToMove, int colToMove) {
+        try {
 
-        if (players[0].getTurn()) {
-           /* if (defaultBoard.getFigures()[figureRow][figureCol].getColor().equals(FigureColor.BLACK)){
+            Player player;
+            Player player1;
 
-                throw new IllegalArgumentException("White is on move.");
+            if (defaultBoard.getFigures()[figureRow][figureCol] == null) {
+
+                throw new IllegalArgumentException("Invalid move");
             }
 
-            */
-            players[0].setTurn(false);
-            players[1].setTurn(true);
-        } else {
-           /* if (defaultBoard.getFigures()[figureRow][figureCol].getColor().equals(FigureColor.WHITE)){
+            if (players[0].getTurn()) {
 
-                throw new IllegalArgumentException("Black is on move.");
+                if (defaultBoard.getFigures()[figureRow][figureCol].getColor().equals(FigureColor.BLACK)) {
+
+                    throw new IllegalArgumentException("White is on move.");
+                }
+
+                player = players[0];
+                player1 = players[1];
+            } else {
+
+                if (defaultBoard.getFigures()[figureRow][figureCol].getColor().equals(FigureColor.WHITE)) {
+
+                    throw new IllegalArgumentException("Black is on move.");
+                }
+
+                player = players[1];
+                player1 = players[0];
             }
 
-            */
-            players[1].setTurn(false);
-            players[0].setTurn(true);
+            if (defaultBoard.moveFigure(figureRow, figureCol, rowToMove, colToMove)) {
+
+                player.setTurn(false);
+                player1.setTurn(true);
+            }
+
+        } catch (Exception ignored) {
+
+            System.out.println(ignored.getMessage());
         }
-
-        defaultBoard.moveFigure(figureRow, figureCol, rowToMove, colToMove);
     }
 
 
