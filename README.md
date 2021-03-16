@@ -1,0 +1,1 @@
+I have decided to make a Console chess game as my first ever big project.
